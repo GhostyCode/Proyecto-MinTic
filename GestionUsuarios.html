@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+          integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
     <link rel="stylesheet" href="GestionUsuarios.css">
 
     <title>Gestion de Usuarios</title>
@@ -17,59 +17,134 @@
     <!-- 
     =================== NAVBAR =============================
     -->
+    <div class="row">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-collapse container-fluid bg-dark">
+            <a class="navbar-brand" href="#">
+                <h3 class="text-primary">FSOCIETY</h3>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-collapse container-fluid bg-dark">
-        <a class="navbar-brand" href="#">
-            <h3 class="text-primary">FSOCIETY</h3>
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <a class="navbar-brand" href="#">
-            <h5 class="text-light text-right">Nombre Usuario</h5>
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-    </nav>
-
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
-
+            <a class="navbar-brand" href="#">
+                <h5 class="text-light text-right">Nombre Usuario</h5>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+        </nav>
+    </div>
     <!-- 
     =================== VERTICAL NAV =============================
     -->
     <div class="row">
-        <div class="bg-dark col-md-2">
-            <nav class="nav flex-column">
+        <div class="bg-dark col-md-2 col-sm-block">
+            <nav class="nav flex-column nav-pills nav-fill">
                 <a class="nav-link" href="#">Venta</a>
                 <a class="nav-link" href="#">Producto</a>
                 <a class="nav-link active" href="#">Gestion de Usuarios</a>
             </nav>
         </div>
             <!-- 
-            =================== CONTENIDO - TABLA =============================
+            =================== CONTENIDO - TABLA ================================
             -->
-        <div class="contenido col-md-7">
+        <div class="contenido col-md-7 col-sm-12 container">
             <h4 class="text-light">
                 Gestión de Usuarios
             </h4>
+
+        <div class="container">
+            <table class="table table-striped table-dark">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Identificación</th>
+                        <th scope="col">Correo Electronico</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col">Rol</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">0000000001</th>
+                        <td>User1@gmail.com</td>
+                        <td>
+                            <select class="custom-select">
+                                <option selected>Estado</option>
+                                <option value="1">Pendiente</option>
+                                <option value="2">Autorizado</option>
+                                <option value="3">No autorizado</option>
+                            </select>
+        
+                            </div>
+        
+                        </td>
+                        <td>
+                            <select class="custom-select">
+                                <option selected>Rol</option>
+                                <option value="1">Administrador</option>
+                                <option value="2">Vendedor</option>
+                            </select>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        
+        
+        
+            <span class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-dark" data-toggle="modal" data-target="#GuardarModal">
+                    Guardar Cambios
+                </button>
+            </span>
+            
+            <div class="modal fade" id="GuardarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Cambios realizados con éxito</h5>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="close btn-dark" data-dismiss="modal"
+                                aria-label="Close">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         </div>   
             <!-- 
             =================== BUSCADOR - OPCIONES =============================
             -->
-        <div class="contenido col-md-3">
-            <div class="form-group container">
-                <h5 class="text-light">Buscar Usuario</h5>
-                <input type="text email" class="form-control" id="InputUsuario" placeholder="ID o Correo Electronico">
-                <small id="TextoAyuda" class="form-text text-muted">Busca por ID o Correo del usuario</small>
+        <div class="contenido col-md-3 col-sm-block">
+            <form action="">
+                <div class="form container">
+                    <h5 class="text-light">Buscar Usuario</h5>
+                    <input type="text email" class="form-control" id="InputUsuario" placeholder="User@gmail.com">
+                    <small id="TextoAyuda" class="form-text text-muted">Busca por Correo o ID del usuario</small>
+                </div>
+                <div class="container">
+                    <button type="button" class="btn btn-primary">Buscar</button>
+                </div>
+            </form>
+        </div>
+            <!-- 
+            =================== FOOTER =============================
+            -->
+        <div class="row ">
+            <div class="footer bg-dark">
+                <h6 class="text-white">
+                    FOOTER
+                </h6>
             </div>
         </div>
-
-
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+
 
 </body>
 
