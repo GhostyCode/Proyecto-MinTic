@@ -42,6 +42,8 @@ const signInWithGoogle = async () => {
         name: user.displayName,
         authProvider: "google",
         email: user.email,
+        rol:"vendedor",
+        estado:"pendiente"
       });
     }
   } catch (err) {
@@ -68,6 +70,8 @@ const signInWithEmailAndPassword = async (email, password) => {
         name,
         authProvider: "local",
         email,
+        rol:"vendedor",
+        estado:"pendiente"
       });
     } catch (err) {
       console.error(err);

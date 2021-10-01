@@ -15,6 +15,13 @@
     border-radius:  20px;
     color: #27282c;
   }
+  .register__label{
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+    display: block;
+    text-align: left;
+  }
   .register__textBox {
     padding: 10px;
     font-size: 18px;

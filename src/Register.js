@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, useHistory } from "react-router-dom";
+import { PersonSquare } from 'react-bootstrap-icons';
 import {
   auth,
   registerWithEmailAndPassword,
@@ -20,11 +21,13 @@ function Register() {
   };
   useEffect(() => {
     if (loading) return;
-    if (user) history.replace("/dashboard");
+    if (user) history.replace("/ventas");
   }, [user,history, loading]);
   return (
     <div className="register">
       <div className="register__container">
+      <h1><PersonSquare /></h1>
+      <label  className="register__label" >Nombre Completo:</label>
         <input
           type="text"
           className="register__textBox"
@@ -32,6 +35,7 @@ function Register() {
           onChange={(e) => setName(e.target.value)}
           placeholder="Full Name"
         />
+        <label  className="register__label" >Email:</label>
         <input
           type="text"
           className="register__textBox"
@@ -39,6 +43,7 @@ function Register() {
           onChange={(e) => setEmail(e.target.value)}
           placeholder="E-mail Address"
         />
+        <label  className="register__label" >Password:</label>
         <input
           type="password"
           className="register__textBox"

@@ -3,6 +3,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import { auth, sendPasswordResetEmail } from "./firebase";
+import { EnvelopeFill } from 'react-bootstrap-icons';
 import "./Reset.css";
 function Reset() {
   const [email, setEmail] = useState("");
@@ -10,11 +11,13 @@ function Reset() {
   const history = useHistory();
   useEffect(() => {
     if (loading) return;
-    if (user) history.replace("/dashboard");
+    if (user) history.replace("/ventas");
   }, [user, history,loading]);
   return (
     <div className="reset">
       <div className="reset__container">
+      <h1><EnvelopeFill /></h1>
+      <label className="reset__label" >Correo:</label>
         <input
           type="text"
           className="reset__textBox"

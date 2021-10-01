@@ -17,7 +17,7 @@ function Login() {
       // maybe trigger a loading screen
       return;
     }
-    if (user) history.replace("/dashboard");
+    if (user) history.replace("/ventas");
   }, [user, loading,history]);
   return (
     <div className="login">
