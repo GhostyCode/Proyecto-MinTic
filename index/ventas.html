@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilo_ventas.css">
+    <link rel="stylesheet" href="normalize.css">
+
+    <title>Ventas</title>
+</head>
+
+<body>
+    <!-- 
+    =================== NAVBAR SUPERIOR =============================
+    -->
+
+    <header class="cabecera">
+        <nav class="navegacion">
+            <div class="navegacion_logo">
+                <img src="../img/logo_fsociety.png" alt="">
+            </div>
+            <div class="navegacion_perfil">
+                <div class="navegacion_perfil--imagen">
+                    <img src="../img/usuario.png" alt="">
+                </div>
+                <div class="navegacion_perfil--nombre">
+                    <h4>Jose Jorge Noriega</h4>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="contenedor">
+
+
+
+        <!-- 
+    =================== NAVBAR LATERAL =============================
+    -->
+        <div class="cuerpo">
+            <nav class="navegacion2">
+                <div class="navegacion2_botones">
+                    <a class="boton" href="">
+                        <div class="boton_seccion">
+                            <img src="../img/venta.png" alt="">
+                            <h5>Primer boton</h5>
+                        </div>
+                    </a>
+                    <a class="boton" href="">
+                        <div class="boton_seccion">
+                            <img src="../img/producto.png" alt="">
+                            <h5>Segundo boton</h5>
+                        </div>
+                    </a>
+                    <a class="boton" href="">
+                        <div class="boton_seccion">
+                            <img src="../img/usuarios.png" alt="">
+                            <h5>Tercer boton</h5>
+                        </div>
+                    </a>
+                </div>
+            </nav>
+            <!-- 
+                =================== CONTENIDO =============================
+            -->
+            <div class="contenido">
+
+                <div class="partes">
+                    <div class="partes_resultado">
+                        <div class="partes_resultado_busqueda">
+                            <input class="partes_resultado_busqueda--campo" type="text" name="buscar_producto">
+                            <input class="partes_resultado_busqueda--boton" type="button" name="buscar" value="Buscar">
+                        </div>
+                    </div>
+                    <div class="partesVista">
+                        <div class="partesVista_lista">
+                            
+                        </div>
+                        <div class="partesVista_cliente">
+                            <h4>Datos del Cliente</h4>
+                            <div class="partesVista_cliente--dato">
+                                <input type="text" placeholder="Nombre del Cliente">
+                            </div>
+                            <div class="partesVista_cliente--dato">
+                                <input type="number" placeholder="Cedula del Cliente">
+                            </div>
+                            
+                        </div>
+                        <div class="partesVista_total">
+                            <div class="partesVista_total--resultado">
+                                <h5>Total: </h5>
+                                <input type="text" name="total" placeholder="total" id="">
+                            </div>
+                            <div class="partesVista_total--boton">
+                                <input type="button" value="VER RESUMEN">
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>
