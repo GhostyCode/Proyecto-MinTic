@@ -114,11 +114,12 @@ a{
   background-color: transparent;
   border: 1px solid var(--negro);
   max-width: 100%;
+  height: 35px;
 }
 .partes_resultado_busqueda--boton{
   background-color: var(--naranja);
   border: none;
-
+  cursor: pointer;
 }
 
 .partesVista_lista{
@@ -153,6 +154,7 @@ a{
   border-radius: 3px;
   padding: 20px 40px;
   margin-top: 50px;
+  cursor: pointer;
 }
 .partesVista_total--resultado input{
   border: 1px solid var(--naranja);
