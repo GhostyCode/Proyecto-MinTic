@@ -27,7 +27,7 @@ function Login() {
         <input
           type="text"
           id="loginmail"
-          className="login__textBox"
+          className="login__textBox form-control"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="E-mail Address"
@@ -35,7 +35,7 @@ function Login() {
         <label for="loginmail" className="login__label" >Contraseña:</label>
         <input
           type="password"
-          className="login__textBox"
+          className="login__textBox form-control"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Password"

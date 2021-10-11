@@ -30,7 +30,7 @@ function Register() {
       <label  className="register__label" >Nombre Completo:</label>
         <input
           type="text"
-          className="register__textBox"
+          className="register__textBox form-control"
           value={name}
           onChange={(e) => setName(e.target.value)}
           placeholder="Full Name"
@@ -38,7 +38,7 @@ function Register() {
         <label  className="register__label" >Email:</label>
         <input
           type="text"
-          className="register__textBox"
+          className="register__textBox form-control"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="E-mail Address"
@@ -46,7 +46,7 @@ function Register() {
         <label  className="register__label" >Password:</label>
         <input
           type="password"
-          className="register__textBox"
+          className="register__textBox form-control"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Password"

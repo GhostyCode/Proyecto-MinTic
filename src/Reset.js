@@ -20,7 +20,7 @@ function Reset() {
       <label className="reset__label" >Correo:</label>
         <input
           type="text"
-          className="reset__textBox"
+          className="reset__textBox form-control"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="E-mail Address"
