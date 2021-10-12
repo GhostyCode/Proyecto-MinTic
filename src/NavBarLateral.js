@@ -24,14 +24,15 @@ function NavBarLateral() {
     }
   };
   useEffect(() => {
-    if (loading){
+    if (loading) {
       return;
-    } 
+    }
     if (!user) return history.replace("/");
     fetchUserName();
-  }, [user, loading,history]);
+  }, [user, loading, history]);
   return (
     <nav id="sidebarMenu" className="col-md-3 col-lg-2 d-md-block bg-dark sidebar collapse">
+<<<<<<< HEAD
          <div className="position-sticky pt-3">
          <ul className="nav flex-column">
             <li class="nav-item">
@@ -62,16 +63,45 @@ function NavBarLateral() {
                 Usuarios
             </Link> 
             </li>
+=======
+      <div className="position-sticky pt-3">
+        <ul className="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="../ventas">
+              <div class="boton_seccion">
+                <img src={venta} alt="" width="25em" height="25em" />
+                <h5>Ventas</h5>
+              </div>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a className="nav-link active" aria-current="page" href='../' > 
+            <div class="boton_seccion">
+              <img src={producto} alt="" width="25em" height="25em" />
+              <h5>Productos</h5>
+            </div>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a className="nav-link active" aria-current="page" href='../gestionusuarios'>
+            <div class="boton_seccion">
+              <img src={usuario} alt="" width="25em" height="25em" />
+              <h5>Gestion de Usuarios</h5>
+            </div>  
+            </a>
+            
+          </li>
 
-         </ul>
-             
-             
-             </div>
-         
+        </ul>
+
+
+      </div>
+>>>>>>> b59c9bdca56464b8b9e08b95ca062618fb11efa9
+
 
 
     </nav>
-    
+
   );
 }
 export default NavBarLateral;

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link rel="stylesheet" href="GestionUsuarios.css">
+    <title>Gestion de Usuarios</title>
+</head>
+
+<body>
+
+    <!-- 
+    =================== NAVBAR =============================
+    -->
+    <div class="row">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-collapse container-fluid bg-dark">
+                <a class="navbar-brand" href="#">
+                    <div class="container">
+                        <h3 class="text-primary">FSOCIETY</h3>
+                    </div>
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+            <div class="container d-flex flex-md-row-reverse flex-sm-row">
+                <a class="navbar-brand" href="#">
+                    <!-- <class class="align-items-around"> -->
+                        <!-- <img src="/images/perfil.jpg" class="img-circle" width="10%" height="10%" alt="Imagen de usuario"> -->
+                        <h6 class="text-light">Nombre Usuario</h6>
+                    <!-- </class> -->
+                </a>
+            </div>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+        </nav>
+    </div>
+    <!-- 
+    =================== VERTICAL NAV =============================
+    -->
+    <div class="row">
+        <div class="bg-dark col-md-2 col-sm-block">
+            <nav class="nav flex-column   nav-pills nav-fill d-flex mt-md-5">
+                <a class="nav-link" href="/src/Ventas.html">Venta</a>
+                <div class="mt-md-5 container d-flex justify-content-center">
+                    <a class="nav-link" href="/src/Productos.html">Producto</a>
+                </div>
+                <div class="mt-md-5 container d-flex justify-content-center text-center">
+                    <a class="nav-link active" href="/src/GestionUsuarios.html">Gestion de Usuarios</a>
+                </div>
+            </nav>
+        </div>
+            <!-- 
+            =================== BUSCADOR - TABLA ================================
+            -->
+        <div class="contenido col-md-7 col-sm-12 container">
+            <div class="contenido mb-4 mt-5">
+                <form class="form-inline">
+                    <div class="form-group mx-sm-3 mb-2">
+                        <h3 class="text-light">Buscar Usuario</h3>
+                        <input type="text" class="form-control" id="EntradaUsuario" placeholder="Usuario01@gmail.com">
+                        <label for="EntradaUsuario" class="sr-only">Busqueda por ID o Correo</label>
+                    </div>
+                    <div class="container d-flex justify-content-end">
+                        <button type="submit" class="btn btn-primary mb-1">Buscar</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="container">
+                <table class="table table-striped table-dark">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Identificación</th>
+                            <th scope="col">Correo</th>
+                            <th scope="col">Estado</th>
+                            <th scope="col">Rol</th>
+                            <th scope="col">Detalles</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">0000000001</th>
+                            <td>User1@gmail.com</td>
+                            <td>
+                                    <select class="custom-select">
+                                        <option selected>Estado</option>
+                                        <option value="1">Pendiente</option>
+                                        <option value="2">Autorizado</option>
+                                        <option value="3">No autorizado</option>
+                                    </select>
+                            </td>
+                            <td>
+                                <select class="custom-select">
+                                    <option selected>Rol</option>
+                                    <option value="1">Administrador</option>
+                                    <option value="2">Vendedor</option>
+                                </select>
+                            </td>
+                            <td>
+                                <a href="#DetallesUsuario">Detalles</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <span class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-dark" data-toggle="modal" data-target="#GuardarModal">
+                    Guardar Cambios
+                </button>
+            </span>
+            
+            <div class="modal fade" id="GuardarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Cambios realizados con éxito</h5>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="close btn-dark" data-dismiss="modal"
+                                aria-label="Close">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>   
+            <!-- 
+            =================== DETALLES POR USUARIO =============================
+            -->
+            
+            <div class="contenido col-md-3 col-sm-0 container bg-dark" id="DetallesUsuario">
+                <div class="container mb-md-5 mt-md-5">
+                    <img src="/images/perfil.jpg" class="img-fluid img-thumbnail img-rounded" alt="Responsive image">
+                </div>
+                <div class="container">
+                    <ul class="list-group">
+                        <li class="list-group-item mb-2 bg-dark text-light border-light">Nombre: Primer Usuario</li>
+                        <li class="list-group-item mb-2 bg-dark text-light border-light">Correo: user1@gmail.com</li>
+                        <li class="list-group-item mb-2 bg-dark text-light border-light">Estado: Pendiente</li>
+                        <li class="list-group-item mb-2 bg-dark text-light border-light">Rol: Vendedor</li>
+                        <li class="list-group-item mb-2 bg-dark text-light border-light">
+                            <h6 class="text-center">Descripción Personal</h6>
+                            <p class="text-justify">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam, 
+                                                    dolorem sit, itaque sint vitae tenetur voluptatum debitis cumque 
+                                                    soluta dicta, illum ex blanditiis repellendus explicabo fuga impedit 
+                                                    rem aliquid non!</p>
+                        </li>
+                      </ul>
+                </div>
+            </div>
+
+            <!-- 
+            =================== FOOTER =============================
+            -->
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+    <!-- <script src="/GestionUsuarios.js"></script> -->
+
+</body>
+
+</html>     
