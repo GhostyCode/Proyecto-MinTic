@@ -18,8 +18,8 @@ const firebaseConfig = {
   projectId: "misiontic-d982c",
   storageBucket: "misiontic-d982c.appspot.com",
   messagingSenderId: "824383049695",
-  appId: "1:824383049695:web:3a8020841820e12eb87e6a",
-  measurementId: "G-S3BVPZTSG3"
+  appId: "1:824383049695:web:4297ad52b976ca20b87e6a",
+  measurementId: "G-Z6NZBCYT17"
 };
 
 // Initialize Firebase

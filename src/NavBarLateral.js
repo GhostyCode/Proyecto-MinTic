@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useHistory } from "react-router";
+import { Link, useHistory } from "react-router-dom";
 import "./Ventas.css";
 import { auth, db, logout } from "./firebase";
 import usuario from "./usuarios.png"
@@ -35,24 +35,32 @@ function NavBarLateral() {
          <div className="position-sticky pt-3">
          <ul className="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">
+            
                 <div class="boton_seccion">
                     <img src={venta} alt="" width="25em" height="25em"/>
-                    <h5>Ventas</h5>
+                   
                 </div>
-                </a>
+            <Link to="/ventas">
+                Ventas
+            </Link> 
             </li>
             <li class="nav-item">
             <div class="boton_seccion">
                     <img src={producto} alt="" width="25em" height="25em"/>
-                    <h5>Productos</h5>
+                   
                 </div>
+                <Link to="/productos">
+                Productos
+            </Link> 
             </li>
             <li class="nav-item">
             <div class="boton_seccion">
                     <img src={usuario} alt="" width="25em" height="25em"/>
-                    <h5>Usuarios</h5>
+                   
                 </div>
+                <Link to="/productos">
+                Usuarios
+            </Link> 
             </li>
 
          </ul>
