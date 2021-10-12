@@ -1,10 +1,13 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import NavBar from "./NavBar";
 import NavBarLateral from "./NavBarLateral";
+import './GestionTabla.css';
+import editar from "./editar.png"
 
 function GestionTabla() {
 
   const [usuarios, setUsuarios] = React.useState([
+
     { identificacion: '0001', correo: 'user1@gmail.com', estado: 'Pendiente', rol: 'Vendedor' },
     { identificacion: '0002', correo: 'user2@gmail.com', estado: 'Pendiente', rol: 'Vendedor' },
     { identificacion: '0003', correo: 'user3@gmail.com', estado: 'Autorizado', rol: 'Administrador' },
@@ -26,11 +29,41 @@ function GestionTabla() {
     rol: ''
   });
 
+  // const urlUsuarios = 'https://us-central1-misiontic-d982c.cloudfunctions.net/getUsers'
+
+  // const fetchApi = async () => {
+  //   const res = await fetch(urlUsuarios)
+  //   console.log(res.type)
+  // }
+
+  // useEffect(() => {
+  //   fetchApi()
+  // }, [])
+
   const [idCambiada, setIdCambiada] = React.useState('');
+  const [idBuscada, setIdBuscada] = React.useState('');
 
   //  const [listaUsuarios, setListaUsuarios] = React.useState([]);
 
   // setListaUsuarios(usuarios); 
+
+  const handleBuscador = (e) =>{
+    setIdBuscada(e.target.value)
+  }
+
+  const handleBotonBuscador = (e) =>{
+    e.preventDefault()
+
+    if(!idBuscada.trim())
+      return
+    
+    setUsuario(usuarios.find(us=>{
+        return us.identificacion === idBuscada
+    }))
+
+    setIdBuscada('')
+
+  }
 
   const handleEstado = (e) => {
     setIdCambiada(usuario.identificacion)
@@ -72,7 +105,14 @@ function GestionTabla() {
       <div className="row">
         <NavBarLateral />
         <div className="col-md-6 col-sm-10">
-          <div className="container">
+          <div ClassName="">
+            <form ClassName="" onSubmit={handleBotonBuscador}>
+              <h4 className="text-light">Buscar Usuario</h4>
+              <input className="" type="text" placeholder="Busqueda por ID" onChange={handleBuscador} value={idBuscada}/>
+              <button className="btn btn-dark btn-outline-secondary ml-3">Buscar</button>
+            </form>
+          </div>
+          <div className="container mt-4">
             <table className="table table-striped table-dark table-responsive">
 
               <thead className="thead-dark">
@@ -93,10 +133,10 @@ function GestionTabla() {
                       <td>{u.estado}</td>
                       <td>{u.rol}</td>
                       <td>
-                        <button type="submit" className="btn btn-dark" data-toggle="modal" data-target="#editarModal"
+                        <button type="submit" className="btn" data-toggle="modal" data-target="#editarModal"
                           onClick={() => { setUsuario(u) }}
                         >
-                          editar
+                          <img className="iconoEditarUsuario" src={editar} alt="editar" />
                         </button>
                       </td>
                     </tr>
@@ -107,10 +147,10 @@ function GestionTabla() {
             </table>
           </div>
         </div>
-        <div className="col-md-3 col-sm-12 bg-dark container">
-          <label>Identificacion</label>
+        <div className="col-md-3 col-sm-12 bg-dark container mt-2">
+          <label className="text-light d-flex mt-4 mb-2">Identificacion</label>
           <input className="form-control container" id="disabledInput" type="text" placeholder={usuario.identificacion} disabled />
-          <label>Correo</label>
+          <label className="text-light d-flex mt-2 mb-2">Correo</label>
           <input className="form-control container" id="disabledInput" type="text" placeholder={usuario.correo} disabled />
           <form>
             <select className="custom-select mt-3" onChange={handleEstado}>
@@ -134,15 +174,15 @@ function GestionTabla() {
         </div>
       </div>
 
-      <div class="modal fade" id="guardarEdicion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      <div className="modal fade" id="guardarEdicion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Cambios realizados con éxito</h5>
+        <div className="modal-dialog" role="document">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="exampleModalLabel">Cambios realizados con éxito</h5>
             </div>
-            <div class="modal-footer">
-              <button type="button" class="close btn-dark" data-dismiss="modal"
+            <div className="modal-footer">
+              <button type="button" className="close btn-dark" data-dismiss="modal"
                 aria-label="Close">Cerrar</button>
             </div>
           </div>
