@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useHistory } from "react-router";
+import {useHistory } from "react-router-dom";
 import "./Ventas.css";
 import { auth, db, logout } from "./firebase";
 import NavBar from "./NavBar";
