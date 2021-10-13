@@ -1,8 +1,10 @@
+
 import React, { useEffect, useState } from "react";
 import NavBar from "./NavBar";
 import NavBarLateral from "./NavBarLateral";
-import {consultarDatabase } from "./firebase";
-
+import {consultarDatabase,actualizarDocumentoDatabase } from "./firebase";
+import editar from "./editar.png"
+import "./GestionTabla.css";
 function GestionTabla() {
 
 
@@ -10,15 +12,7 @@ function GestionTabla() {
 
    const [usuarios, setUsuarios] = React.useState([]); 
 
-   /*async function  postData() {
-      let response = fetch('https://us-central1-misiontic-d982c.cloudfunctions.net/getUsers', {    
-        'method':'post',
-        headers: new Headers({ 'Content-type': 'application/json'}),
-        mode: 'no-cors'
-      });
-      let json = await response.json();
-      console.log(json);
-  }*/
+
 
   async function  postData()  {
     
@@ -26,40 +20,48 @@ function GestionTabla() {
       
   };
 
-   /*
-       { identificacion: '0001', correo: 'user1@gmail.com', estado: 'Pendiente', rol: 'Vendedor' },
-    { identificacion: '0002', correo: 'user2@gmail.com', estado: 'Pendiente', rol: 'Vendedor' },
-    { identificacion: '0003', correo: 'user3@gmail.com', estado: 'Autorizado', rol: 'Administrador' },
-    { identificacion: '0004', correo: 'user4@gmail.com', estado: 'Pendiente', rol: 'Vendedor' },
-    { identificacion: '0005', correo: 'user5@gmail.com', estado: 'Pendiente', rol: 'Vendedor' },
-    { identificacion: '0006', correo: 'user6@gmail.com', estado: 'Autorizado', rol: 'Administrador' },
-    { identificacion: '0007', correo: 'user7@gmail.com', estado: 'No autorizado', rol: 'Vendedor' },
-    { identificacion: '0008', correo: 'user8@gmail.com', estado: 'Autorizado', rol: 'Vendedor' },
-    { identificacion: '0009', correo: 'user9@gmail.com', estado: 'No autorizado', rol: 'Vendedor' },
-    { identificacion: '00010', correo: 'user10@gmail.com', estado: 'Autorizado', rol: 'Administrador' },
-    { identificacion: '00011', correo: 'user11@gmail.com', estado: 'No Autorizado', rol: 'Vendedor' },
-    { identificacion: '00012', correo: 'user12@gmail.com', estado: 'Autorizado', rol: 'Vendedor' },
-   */ 
 
   const [usuario, setUsuario] = React.useState({
-    identificacion: '',
-    correo: '',
+    id: '',
+    email: '',
     estado: '',
     rol: ''
   });
 
+
+
   const [idCambiada, setIdCambiada] = React.useState('');
+  const [idBuscada, setIdBuscada] = React.useState('');
 
   //  const [listaUsuarios, setListaUsuarios] = React.useState([]);
 
   // setListaUsuarios(usuarios); 
 
+  const handleBuscador = (e) =>{
+    setIdBuscada(e.target.value)
+  }
+
+  const handleBotonBuscador = (e) =>{
+    e.preventDefault()
+
+    if(!idBuscada.trim())
+      return
+    
+    setUsuario(usuarios.find(us=>{
+        return us.id === idBuscada
+    }))
+
+    setIdBuscada('')
+
+  }
+
   const handleEstado = (e) => {
-    setIdCambiada(usuario.identificacion)
+    setIdCambiada(usuario.id)
+    
     setUsuario(
       {
-        identificacion: usuario.identificacion,
-        correo: usuario.correo,
+        id: usuario.id,
+        email: usuario.email,
         estado: e.target.value,
         rol: usuario.rol,
       }
@@ -67,24 +69,32 @@ function GestionTabla() {
   }
 
   const handleRol = (e) => {
-    setIdCambiada(usuario.identificacion)
+    setIdCambiada(usuario.id)
     setUsuario(
       {
-        identificacion: usuario.identificacion,
-        correo: usuario.correo,
+        id: usuario.id,
+        email: usuario.email,
         estado: usuario.estado,
         rol: e.target.value,
       }
     )
   }
 
-  const handleEdicionUsuario = (e) => {
+  const handleEdicionUsuario = async (e) => {
     e.preventDefault();
-
+   
     const listaTemporal = usuarios.map((item) => {
-      return item.identificacion === idCambiada ? usuario : item
+      
+        
+        return item.id === idCambiada ? usuario : item
+       
     })
 
+    let data=listaTemporal.find((item)=>{
+      return item.id === idCambiada
+    })
+
+    actualizarDocumentoDatabase("users",usuario.id,data);
     setUsuarios(listaTemporal)
   }
 
@@ -98,7 +108,18 @@ function GestionTabla() {
       <div className="row">
         <NavBarLateral />
         <div className="col-md-6 col-sm-10">
-          <div className="container">
+          <div ClassName="">
+            <form ClassName="" onSubmit={handleBotonBuscador}>
+              <br/>
+              <br/>
+              <h4 className="headertekst text-light">Buscar Usuario</h4>
+              <div class="buscar-group input-group mb-6 " >
+                <input className="" type="text" placeholder="Busqueda por ID" onChange={handleBuscador} value={idBuscada}/>
+                <button className="btn btn-dark btn-outline-secondary ml-3">Buscar</button>
+              </div>
+            </form>
+          </div>
+          <div className="container mt-4">
             <table className="table table-striped table-dark table-responsive">
 
               <thead className="thead-dark">
@@ -119,10 +140,10 @@ function GestionTabla() {
                       <td>{u.estado}</td>
                       <td>{u.rol}</td>
                       <td>
-                        <button type="submit" className="btn btn-dark" data-toggle="modal" data-target="#editarModal"
+                        <button type="submit" className="btn" data-toggle="modal" data-target="#editarModal"
                           onClick={() => { setUsuario(u) }}
                         >
-                          editar
+                          <img className="iconoEditarUsuario" src={editar} alt="editar" />
                         </button>
                       </td>
                     </tr>
@@ -133,11 +154,11 @@ function GestionTabla() {
             </table>
           </div>
         </div>
-        <div className="col-md-3 col-sm-12 bg-dark container">
-          <label>Identificacion</label>
-          <input className="form-control container" id="disabledInput" type="text" placeholder={usuario.identificacion} disabled />
-          <label>Correo</label>
-          <input className="form-control container" id="disabledInput" type="text" placeholder={usuario.correo} disabled />
+        <div className="col-md-3 col-sm-12 bg-dark container mt-2">
+          <label className="text-light d-flex mt-4 mb-2">Identificacion</label>
+          <input className="form-control container" id="disabledInput" type="text" placeholder={usuario.id} disabled />
+          <label className="text-light d-flex mt-2 mb-2">Correo</label>
+          <input className="form-control container" id="disabledInput" type="text" placeholder={usuario.email} disabled />
           <form>
             <select className="custom-select mt-3" onChange={handleEstado}>
               <option selected hidden>{usuario.estado}</option>

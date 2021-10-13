@@ -34,15 +34,15 @@ function NavBarLateral() {
     <nav id="sidebarMenu" className="col-md-3 col-lg-2 d-md-block bg-dark sidebar collapse">
       <div className="position-sticky pt-3">
         <ul className="nav flex-column">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="../ventas">
-              <div class="boton_seccion">
+          <li className="nav-item">
+            <a className="nav-link active" aria-current="page" href="../ventas">
+              <div className="boton_seccion">
                 <img src={venta} alt="" width="25em" height="25em" />
                 <Link to="/ventas">Ventas</Link>
               </div>
             </a>
           </li>
-          <li class="nav-item">
+          <li className="nav-item">
             <a className="nav-link active" aria-current="page" href='../' > 
             <div class="boton_seccion">
               <img src={producto} alt="" width="25em" height="25em" />
@@ -50,9 +50,9 @@ function NavBarLateral() {
             </div>
             </a>
           </li>
-          <li class="nav-item">
+          <li className="nav-item">
             <a className="nav-link active" aria-current="page" href='../gestionusuarios'>
-            <div class="boton_seccion">
+            <div className="boton_seccion">
               <img src={usuario} alt="" width="25em" height="25em" />
               <Link to="/gestionusuarios">Gestion de usuarios</Link>
             </div>  

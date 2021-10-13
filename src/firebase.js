@@ -2,7 +2,7 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 import 'firebase/compat/functions';
-
+import { addDoc, collection, getDocs, query, getDoc, doc, updateDoc, deleteDoc } from 'firebase/firestore'
 
 
 // Import the functions you need from the SDKs you need
@@ -54,6 +54,20 @@ const consultarDatabase = async (nombreColeccion )=>{
     throw new Error(e)
   }
 }
+
+
+const actualizarDocumentoDatabase  = async (nombreColeccion, id, data )=>{
+  try {
+    console.log(data.rol);
+    console.log(data.estado);
+    //const respuesta = await updateDoc(doc(db, nombreColeccion, id), data)
+    await db.collection(nombreColeccion).doc(id).update(data);
+    
+  } catch (e) {
+    throw new Error(e)
+  }
+}
+
 
 
 const signInWithGoogle = async () => {
@@ -129,5 +143,6 @@ const signInWithEmailAndPassword = async (email, password) => {
     registerWithEmailAndPassword,
     sendPasswordResetEmail,
     logout,
-    consultarDatabase
+    consultarDatabase,
+    actualizarDocumentoDatabase
   };
