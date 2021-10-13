@@ -1,11 +1,33 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
 import NavBar from "./NavBar";
 import NavBarLateral from "./NavBarLateral";
+import {consultarDatabase } from "./firebase";
 
 function GestionTabla() {
 
-  const [usuarios, setUsuarios] = React.useState([
-    { identificacion: '0001', correo: 'user1@gmail.com', estado: 'Pendiente', rol: 'Vendedor' },
+
+
+
+   const [usuarios, setUsuarios] = React.useState([]); 
+
+   /*async function  postData() {
+      let response = fetch('https://us-central1-misiontic-d982c.cloudfunctions.net/getUsers', {    
+        'method':'post',
+        headers: new Headers({ 'Content-type': 'application/json'}),
+        mode: 'no-cors'
+      });
+      let json = await response.json();
+      console.log(json);
+  }*/
+
+  async function  postData()  {
+    
+    setUsuarios (await consultarDatabase('users'));
+      
+  };
+
+   /*
+       { identificacion: '0001', correo: 'user1@gmail.com', estado: 'Pendiente', rol: 'Vendedor' },
     { identificacion: '0002', correo: 'user2@gmail.com', estado: 'Pendiente', rol: 'Vendedor' },
     { identificacion: '0003', correo: 'user3@gmail.com', estado: 'Autorizado', rol: 'Administrador' },
     { identificacion: '0004', correo: 'user4@gmail.com', estado: 'Pendiente', rol: 'Vendedor' },
@@ -17,7 +39,7 @@ function GestionTabla() {
     { identificacion: '00010', correo: 'user10@gmail.com', estado: 'Autorizado', rol: 'Administrador' },
     { identificacion: '00011', correo: 'user11@gmail.com', estado: 'No Autorizado', rol: 'Vendedor' },
     { identificacion: '00012', correo: 'user12@gmail.com', estado: 'Autorizado', rol: 'Vendedor' },
-  ]);
+   */ 
 
   const [usuario, setUsuario] = React.useState({
     identificacion: '',
@@ -66,6 +88,10 @@ function GestionTabla() {
     setUsuarios(listaTemporal)
   }
 
+  useEffect(()=>{
+    postData()
+  },[]);
+
   return (
     <>
       <div><NavBar /></div>
@@ -88,8 +114,8 @@ function GestionTabla() {
                 {
                   usuarios.map((u) => (
                     <tr>
-                      <td>{u.identificacion}</td>
-                      <td>{u.correo}</td>
+                      <td>{u.id}</td>
+                      <td>{u.email}</td>
                       <td>{u.estado}</td>
                       <td>{u.rol}</td>
                       <td>
@@ -134,15 +160,15 @@ function GestionTabla() {
         </div>
       </div>
 
-      <div class="modal fade" id="guardarEdicion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      <div className="modal fade" id="guardarEdicion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Cambios realizados con éxito</h5>
+        <div className="modal-dialog" role="document">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="exampleModalLabel">Cambios realizados con éxito</h5>
             </div>
-            <div class="modal-footer">
-              <button type="button" class="close btn-dark" data-dismiss="modal"
+            <div className="modal-footer">
+              <button type="button" className="close btn-dark" data-dismiss="modal"
                 aria-label="Close">Cerrar</button>
             </div>
           </div>

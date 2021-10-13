@@ -51,7 +51,7 @@ function Ventas() {
                     <div className="col-6 container-fluid">
                     <div class="col-6 input-group mb-3">
                         <input type="text" className="form-control"/>
-                        <button className="btn btn-outline-primary" type="button">Buscar</button>
+                        <button className="btn btn-outline-danger" type="button">Buscar</button>
                       </div>
                         <div className="list-group list-group-checkable">
                           
@@ -113,19 +113,19 @@ function Ventas() {
 
                                 <div className="list-group mx-0">
                                     <label className="list-group-item d-flex gap-2">
-                                        <button className="btn btn-outline-primary reduceInput">+</button>
-                                        <button className="btn btn-outline-primary reduceInput">-</button>
+                                        <button className="btn btn-outline-danger reduceInput">+</button>
+                                        <button className="btn btn-outline-danger reduceInput">-</button>
                                         <input type="number" className="reduceInput form-control"/>
                                     </label>
 
                                     <label className="list-group-item d-flex gap-2">
-                                        <button className="btn btn-outline-primary reduceInput">+</button>
-                                        <button className="btn btn-outline-primary reduceInput">-</button>
+                                        <button className="btn btn-outline-danger reduceInput">+</button>
+                                        <button className="btn btn-outline-danger reduceInput">-</button>
                                         <input type="number" className="reduceInput form-control"/>
                                     </label>
                                     <label className="list-group-item d-flex gap-2">
-                                        <button className="btn btn-outline-primary reduceInput">+</button>
-                                        <button className="btn btn-outline-primary reduceInput">-</button>
+                                        <button className="btn btn-outline-danger reduceInput">+</button>
+                                        <button className="btn btn-outline-danger reduceInput">-</button>
                                         <input type="number" className="reduceInput form-control"/>
                                     </label>
                                 </div>
@@ -142,7 +142,7 @@ function Ventas() {
                             <h4 className="headertekst">Total</h4>
                             <div class="col-6 input-group mb-3">
                               <input type="number" className="form-control"/>
-                              <button type="button" class="btn btn-outline-primary">Ver resumen</button>
+                              <button type="button" class="btn btn-outline-danger">Ver resumen</button>
                             </div>
                         </div>
 

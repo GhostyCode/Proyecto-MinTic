@@ -1,11 +1,14 @@
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
+import 'firebase/compat/functions';
+
 
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -27,6 +30,31 @@ firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const db = firebase.firestore();     
 const googleProvider = new firebase.auth.GoogleAuthProvider();
+// firebase.functions().useEmulator("localhost", 5001);
+  
+
+const consultarDatabase = async (nombreColeccion )=>{
+  try{
+
+    const respuesta= await db.collection(nombreColeccion).get();
+    const  coleccionDatos= respuesta.docs.map((documento)=>{
+      console.log(documento);
+      console.log(documento.data);
+      const documentoTemporal ={
+        id: documento.id,
+        ...documento.data()
+        
+      }
+      console.log(documentoTemporal)
+      return documentoTemporal
+    }
+    )
+    return coleccionDatos
+  }catch(e){
+    throw new Error(e)
+  }
+}
+
 
 const signInWithGoogle = async () => {
   try {
@@ -101,4 +129,5 @@ const signInWithEmailAndPassword = async (email, password) => {
     registerWithEmailAndPassword,
     sendPasswordResetEmail,
     logout,
+    consultarDatabase
   };

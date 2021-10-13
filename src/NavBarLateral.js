@@ -32,45 +32,13 @@ function NavBarLateral() {
   }, [user, loading, history]);
   return (
     <nav id="sidebarMenu" className="col-md-3 col-lg-2 d-md-block bg-dark sidebar collapse">
-<<<<<<< HEAD
-         <div className="position-sticky pt-3">
-         <ul className="nav flex-column">
-            <li class="nav-item">
-            
-                <div class="boton_seccion">
-                    <img src={venta} alt="" width="25em" height="25em"/>
-                   
-                </div>
-            <Link to="/ventas">
-                Ventas
-            </Link> 
-            </li>
-            <li class="nav-item">
-            <div class="boton_seccion">
-                    <img src={producto} alt="" width="25em" height="25em"/>
-                   
-                </div>
-                <Link to="/productos">
-                Productos
-            </Link> 
-            </li>
-            <li class="nav-item">
-            <div class="boton_seccion">
-                    <img src={usuario} alt="" width="25em" height="25em"/>
-                   
-                </div>
-                <Link to="/productos">
-                Usuarios
-            </Link> 
-            </li>
-=======
       <div className="position-sticky pt-3">
         <ul className="nav flex-column">
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="../ventas">
               <div class="boton_seccion">
                 <img src={venta} alt="" width="25em" height="25em" />
-                <h5>Ventas</h5>
+                <Link to="/ventas">Ventas</Link>
               </div>
             </a>
           </li>
@@ -78,7 +46,7 @@ function NavBarLateral() {
             <a className="nav-link active" aria-current="page" href='../' > 
             <div class="boton_seccion">
               <img src={producto} alt="" width="25em" height="25em" />
-              <h5>Productos</h5>
+              <Link to="/productos">Productos</Link>
             </div>
             </a>
           </li>
@@ -86,7 +54,7 @@ function NavBarLateral() {
             <a className="nav-link active" aria-current="page" href='../gestionusuarios'>
             <div class="boton_seccion">
               <img src={usuario} alt="" width="25em" height="25em" />
-              <h5>Gestion de Usuarios</h5>
+              <Link to="/gestionusuarios">Gestion de usuarios</Link>
             </div>  
             </a>
             
@@ -96,7 +64,6 @@ function NavBarLateral() {
 
 
       </div>
->>>>>>> b59c9bdca56464b8b9e08b95ca062618fb11efa9
 
 
 

@@ -17,6 +17,7 @@ function App() {
            <Route exact path="/reset" component={Reset} />
            <Route exact path="/ventas" component={Ventas} />
            <Route exact path="/gestionusuarios" component={GestionTabla} />
+         
          </Switch>
        </Router>
 
