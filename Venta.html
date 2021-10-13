@@ -68,12 +68,12 @@
         <nav id="sidebarMenu" class="col-md-3 col-lg-2 bg-dark sidebar">
           <div class="position-sticky pt-3">
             <ul class="nav flex-column">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">
+              <li class="nav-item" data-bs-toggle="collapse" data-bs-target="#venta">
+                <a class="nav-link" aria-current="page" href="#">
                   <span data-feather="home"></span>
                   Venta
                 </a>
-                <div class="container">
+                <div class="container collapse" id="venta">
                   <ul class="ventas text-white nav">
                     <li>Maestro ventas</li>
                     <li>Lista de Ventas</li>
@@ -82,13 +82,13 @@
                 </div>
               </li>
               <hr />
-              <li class="nav-item">
-                <a class="nav-link" href="#">
+              <li class="nav-item "data-bs-toggle="collapse" data-bs-target="#venta>
+                <a class="nav-link" href="#" >
                   <span data-feather="file"></span>
                   Productos
                 </a>
-                <div class="container">
-                  <ul class="ventas text-white nav">
+                <div class="container collapse" >
+                  <ul class="ventas text-white nav " id="prod">
                     <li>Maestro Productos</li>
                     <li>Lista de Productos</li>
                     <li>Actualizar Productos</li>
@@ -96,12 +96,12 @@
                 </div>
               </li>
               <hr />
-              <li class="nav-item">
+              <li class="nav-item" data-bs-toggle="collapse" data-bs-target="#venta>
                 <a class="nav-link" href="#">
                   <span data-feather="shopping-cart"></span>
                   Gestion Usuarios
                 </a>
-                <div class="container">
+                <div class="container collapse">
                   <ul class="ventas text-white nav">
                     <li>Maestro Usuarios</li>
                     <li>Lista de Usuarios</li>
