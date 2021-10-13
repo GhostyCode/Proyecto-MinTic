@@ -1,4 +1,5 @@
 import firebase from 'firebase/compat/app';
+import firebaseConfig from './variables.js';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 import 'firebase/compat/functions';
@@ -14,16 +15,7 @@ import { getAnalytics } from "firebase/analytics";
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyCEOzhWd_nQlYea3XL18ijzz2PLR0U-uGo",
-  authDomain: "misiontic-d982c.firebaseapp.com",
-  databaseURL: "https://misiontic-d982c-default-rtdb.firebaseio.com",
-  projectId: "misiontic-d982c",
-  storageBucket: "misiontic-d982c.appspot.com",
-  messagingSenderId: "824383049695",
-  appId: "1:824383049695:web:4297ad52b976ca20b87e6a",
-  measurementId: "G-Z6NZBCYT17"
-};
+
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);

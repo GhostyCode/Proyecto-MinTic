@@ -38,7 +38,7 @@ function Ventas() {
           <NavBarLateral/>
           <main className="main col-md-9 ms-sm-auto col-lg-10 px-md-4">
           <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 >Vender</h1>
+                    <h1 className="text-light">Vender</h1>
                     <div className="btn-toolbar mb-2 mb-md-0">
                         <div className="btn-group me-2">
                             <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
@@ -46,35 +46,35 @@ function Ventas() {
                         </div>
                     </div>
                 </div>
-                <h2 className="headertekst">Ventas</h2>
+                <h2 className="headertekst text-light">Ventas</h2>
                 <div className="row">
                     <div className="col-6 container-fluid">
                     <div class="col-6 input-group mb-3">
                         <input type="text" className="form-control"/>
                         <button className="btn btn-outline-danger" type="button">Buscar</button>
                       </div>
-                        <div className="list-group list-group-checkable">
+                        <div className="list-group list-group-checkable ">
                           
-                            <label className="list-group-item py-3" for="listGroupCheckableRadios1">
+                            <label className="bg-dark text-light list-group-item py-3 " for="listGroupCheckableRadios1">
                                 First radio
                                 <span className="d-block small opacity-50">With support text underneath to add more
                                     detail</span>
                             </label>
 
                            
-                            <label className="list-group-item py-3" for="listGroupCheckableRadios2">
+                            <label className="bg-dark text-light list-group-item py-3" for="listGroupCheckableRadios2">
                                 Second radio
                                 <span className="d-block small opacity-50">Some other text goes here</span>
                             </label>
 
                          
-                            <label className="list-group-item py-3" for="listGroupCheckableRadios3">
+                            <label className="bg-dark text-light list-group-item py-3" for="listGroupCheckableRadios3">
                                 Third radio
                                 <span className="d-block small opacity-50">And we end with another snippet of text</span>
                             </label>
 
                             
-                            <label className="list-group-item py-3" for="listGroupCheckableRadios4">
+                            <label className="bg-dark text-light list-group-item py-3" for="listGroupCheckableRadios4">
                                 Fourth disabled radio
                                 <span className="d-block small opacity-50">This option is disabled</span>
                             </label>
@@ -83,10 +83,10 @@ function Ventas() {
                     </div>
                     <div className="col-6 container-fluid">
                         <div className="container-fluid">
-                            <h4>Productos en Venta</h4>
+                            <h4 className="text-light">Productos en Venta</h4>
                             <div className="d-flex gap-5 justify-content-center">
                                 <div className="list-group mx-0">
-                                    <label className="list-group-item d-flex gap-2">
+                                    <label className="bg-dark text-light list-group-item d-flex gap-2">
                                        
                                         <span>
                                             First checkbox
@@ -94,14 +94,14 @@ function Ventas() {
                                                 detail</small>
                                         </span>
                                     </label>
-                                    <label className="list-group-item d-flex gap-2">
+                                    <label className="bg-dark text-light list-group-item d-flex gap-2">
                                        
                                         <span>
                                             Second checkbox
                                             <small className="d-block text-muted">Some other text goes here</small>
                                         </span>
                                     </label>
-                                    <label className="list-group-item d-flex gap-2">
+                                    <label className="bg-dark text-light list-group-item d-flex gap-2">
                                     
                                         <span>
                                             Third checkbox
@@ -111,19 +111,19 @@ function Ventas() {
                                     </label>
                                 </div>
 
-                                <div className="list-group mx-0">
-                                    <label className="list-group-item d-flex gap-2">
+                                <div className="bg-dark text-light list-group mx-0">
+                                    <label className="bg-dark text-light list-group-item d-flex gap-2">
                                         <button className="btn btn-outline-danger reduceInput">+</button>
                                         <button className="btn btn-outline-danger reduceInput">-</button>
                                         <input type="number" className="reduceInput form-control"/>
                                     </label>
 
-                                    <label className="list-group-item d-flex gap-2">
+                                    <label className="bg-dark text-light list-group-item d-flex gap-2">
                                         <button className="btn btn-outline-danger reduceInput">+</button>
                                         <button className="btn btn-outline-danger reduceInput">-</button>
                                         <input type="number" className="reduceInput form-control"/>
                                     </label>
-                                    <label className="list-group-item d-flex gap-2">
+                                    <label className="bg-dark text-light list-group-item d-flex gap-2">
                                         <button className="btn btn-outline-danger reduceInput">+</button>
                                         <button className="btn btn-outline-danger reduceInput">-</button>
                                         <input type="number" className="reduceInput form-control"/>
