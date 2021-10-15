@@ -5,6 +5,12 @@ import NavBarLateral from "./NavBarLateral";
 import {consultarDatabase,actualizarDocumentoDatabase } from "./firebase";
 import editar from "./editar.png"
 import "./GestionTabla.css";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { Link, useHistory } from "react-router-dom";
+import { auth, db, logout } from "./firebase";
+
+
+
 function GestionTabla() {
 
 
@@ -98,9 +104,40 @@ function GestionTabla() {
     setUsuarios(listaTemporal)
   }
 
-  useEffect(()=>{
+  const [user, loading, error] = useAuthState(auth);
+  const [name, setName] = useState("");
+  const [rol,setRol] = useState("");
+  const history = useHistory();
+  const fetchUserName = async () => {
+    try {
+      const query = await db
+        .collection("users")
+        .where("uid", "==", user?.uid)
+        .get();
+      const data = await query.docs[0].data();
+      setName(data.name);
+      setRol(data.rol)
+    } catch (err) {
+      console.error(err);
+      alert("An error occured while fetching user data");
+    }
+  };
+  useEffect(() => {
+    if (loading) {
+      return;
+    }
+    if (!user) return history.replace("/");
+    fetchUserName();
+    console.log(rol);
+    if(rol==="Vendedor") return history.replace("/");
     postData()
-  },[]);
+  }, [user,loading, history,name,rol]);
+
+
+
+
+
+
 
   return (
     <>
@@ -134,7 +171,7 @@ function GestionTabla() {
               <tbody>
                 {
                   usuarios.map((u) => (
-                    <tr>
+                    <tr key={u.id}>
                       <td>{u.id}</td>
                       <td>{u.email}</td>
                       <td>{u.estado}</td>

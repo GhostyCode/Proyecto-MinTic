@@ -6,6 +6,7 @@ import Register from "./Register";
 import Reset from "./Reset";
 import Ventas from "./Ventas";
 import GestionTabla from "./GestionTabla";
+import Productos from "./Productos";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
            <Route exact path="/reset" component={Reset} />
            <Route exact path="/ventas" component={Ventas} />
            <Route exact path="/gestionusuarios" component={GestionTabla} />
+           <Route exact path="/productos" component={Productos} />
          
          </Switch>
        </Router>

@@ -5,9 +5,10 @@ import "./Ventas.css";
 import { auth, db, logout } from "./firebase";
 import NavBar from "./NavBar";
 import NavBarLateral from "./NavBarLateral";
-function Ventas() {
+function Productos() {
   const [user, loading, error] = useAuthState(auth);
   const [name, setName] = useState("");
+  const[rol,setRol] = useState("");
   const history = useHistory();
   const fetchUserName = async () => {
     try {
@@ -16,8 +17,8 @@ function Ventas() {
         .where("uid", "==", user?.uid)
         .get();
       const data = await query.docs[0].data();
-      console.log(data)
       setName(data.name);
+      setRol(data.rol);
     } catch (err) {
       console.error(err);
       alert("An error occured while fetching user data");
@@ -29,7 +30,8 @@ function Ventas() {
     } 
     if (!user) return history.replace("/");
     fetchUserName();
-  }, [user, loading,history]);
+    if(rol==="Vendedor") return history.replace("/");
+  }, [user, loading,history,name,rol]);
   return (
      <><div>
       <NavBar />
@@ -39,7 +41,7 @@ function Ventas() {
           <NavBarLateral/>
           <main className="main col-md-9 ms-sm-auto col-lg-10 px-md-4">
           <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 className="text-light">Vender</h1>
+                    <h1 className="text-light">Productos</h1>
                     <div className="btn-toolbar mb-2 mb-md-0">
                         <div className="btn-group me-2">
                             <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
@@ -47,7 +49,7 @@ function Ventas() {
                         </div>
                     </div>
                 </div>
-                <h2 className="headertekst-ventas text-light">Buscar Ventas</h2>
+                <h2 className="headertekst text-light">Buscar Producto</h2>
                 <div className="row">
                     <div className="col-6 container-fluid">
                     <div class="col-6 input-group mb-3">
@@ -84,67 +86,69 @@ function Ventas() {
                     </div>
                     <div className="col-6 container-fluid">
                         <div className="container-fluid">
-                            <h4 className="text-light">Productos en Venta</h4>
+                            <h4 className="text-light">Crear Producto</h4>
                             <div className="d-flex gap-5 justify-content-center">
                                 <div className="list-group mx-0">
                                     <label className="bg-dark text-light list-group-item d-flex gap-2">
                                        
                                         <span>
-                                            First checkbox
-                                            <small className="d-block text-muted">With support text underneath to add more
-                                                detail</small>
+                                            Nombre:
+                                           
                                         </span>
+                                       
+                                    </label>
+                                    <label>
+
                                     </label>
                                     <label className="bg-dark text-light list-group-item d-flex gap-2">
                                        
                                         <span>
-                                            Second checkbox
-                                            <small className="d-block text-muted">Some other text goes here</small>
+                                            Precio:
+                                            
                                         </span>
                                     </label>
                                     <label className="bg-dark text-light list-group-item d-flex gap-2">
                                     
                                         <span>
-                                            Third checkbox
-                                            <small className="d-block text-muted">And we end with another snippet of
-                                                text</small>
+                                            Descripción
+                                          
                                         </span>
                                     </label>
                                 </div>
 
                                 <div className="bg-dark text-light list-group mx-0">
                                     <label className="bg-dark text-light list-group-item d-flex gap-2">
-                                        <button className="btn btn-outline-danger reduceInput">+</button>
-                                        <button className="btn btn-outline-danger reduceInput">-</button>
-                                        <input type="number" className="reduceInput form-control"/>
+                                      
+                                        <input type="text" className="reduceInput form-control"/>
                                     </label>
 
                                     <label className="bg-dark text-light list-group-item d-flex gap-2">
-                                        <button className="btn btn-outline-danger reduceInput">+</button>
-                                        <button className="btn btn-outline-danger reduceInput">-</button>
+                                       
                                         <input type="number" className="reduceInput form-control"/>
                                     </label>
                                     <label className="bg-dark text-light list-group-item d-flex gap-2">
-                                        <button className="btn btn-outline-danger reduceInput">+</button>
-                                        <button className="btn btn-outline-danger reduceInput">-</button>
-                                        <input type="number" className="reduceInput form-control"/>
+                                       
+                                        <input type="text" className="reduceInput form-control"/>
+                                        <button type="button" class="btn btn-outline-danger">Guardar Producto</button>
                                     </label>
                                 </div>
                             </div>
                         </div>
                         <hr/>
                         <div className="headertekst">
-                            <h4 className="text-light">Datos del Cliente</h4>
-                            <label className="text-light" for="">Nombre:</label>
-                            <label for=""></label><br/>
-                            <label className="text-light" for="">Documento:</label>
-                            <label for=""></label>
-                            <hr/>
-                            <h4 className="headertekst text-light">Total</h4>
+
                             <div class="col-6 input-group mb-3">
-                              <input type="number" className="form-control"/>
-                              <button type="button" className="btn btn-outline-danger">Ver resumen</button>
+                            
+                            
                             </div>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
                         </div>
 
                     </div>
@@ -156,4 +160,4 @@ function Ventas() {
    </>
   );
 }
-export default Ventas;
+export default Productos;

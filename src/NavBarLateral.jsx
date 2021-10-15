@@ -9,6 +9,7 @@ import producto from "./producto.png"
 function NavBarLateral() {
   const [user, loading, error] = useAuthState(auth);
   const [name, setName] = useState("");
+  const [rol,setRol] = useState("");
   const history = useHistory();
   const fetchUserName = async () => {
     try {
@@ -18,6 +19,7 @@ function NavBarLateral() {
         .get();
       const data = await query.docs[0].data();
       setName(data.name);
+      setRol(data.rol)
     } catch (err) {
       console.error(err);
       alert("An error occured while fetching user data");
@@ -42,7 +44,9 @@ function NavBarLateral() {
               </div>
             </a>
           </li>
-          <li className="nav-item">
+          {
+            rol==="Administrador" &&
+                <li className="nav-item">
             <a className="nav-link active" aria-current="page" href='../' > 
             <div class="boton_seccion">
               <img src={producto} alt="" width="25em" height="25em" />
@@ -50,6 +54,11 @@ function NavBarLateral() {
             </div>
             </a>
           </li>
+            
+        
+          }
+          {
+          rol==="Administrador" &&
           <li className="nav-item">
             <a className="nav-link active" aria-current="page" href='../gestionusuarios'>
             <div className="boton_seccion">
@@ -59,7 +68,7 @@ function NavBarLateral() {
             </a>
             
           </li>
-
+        }
         </ul>
 
 

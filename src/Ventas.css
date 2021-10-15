@@ -37,8 +37,9 @@
   color: #dcdcdc;
 }
 
-.headertekst {
+.headertekst-ventas {
   text-align: left;
+  margin-left: 0px !important;
 }
   .navegacion_perfil{
     display: flex;
