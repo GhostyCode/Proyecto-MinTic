@@ -5,9 +5,17 @@ import "./Ventas.css";
 import { auth, db, logout } from "./firebase";
 import NavBar from "./NavBar";
 import NavBarLateral from "./NavBarLateral";
+import {consultarDatabase,actualizarDocumentoDatabase } from "./firebase";
 function Ventas() {
   const [user, loading, error] = useAuthState(auth);
   const [name, setName] = useState("");
+  const [productos, setProdutos] = useState([]);
+
+  async function  postData()  {
+    
+    setProdutos (await consultarDatabase('products'));
+      
+  };
   const history = useHistory();
   const fetchUserName = async () => {
     try {
@@ -16,7 +24,7 @@ function Ventas() {
         .where("uid", "==", user?.uid)
         .get();
       const data = await query.docs[0].data();
-      console.log(data)
+     
       setName(data.name);
     } catch (err) {
       console.error(err);
@@ -29,6 +37,7 @@ function Ventas() {
     } 
     if (!user) return history.replace("/");
     fetchUserName();
+    postData();
   }, [user, loading,history]);
   return (
      <><div>
@@ -56,91 +65,66 @@ function Ventas() {
                       </div>
                         <div className="list-group list-group-checkable ">
                           
-                            <label className="bg-dark text-light list-group-item py-3 " for="listGroupCheckableRadios1">
-                                First radio
-                                <span className="d-block small opacity-50">With support text underneath to add more
-                                    detail</span>
-                            </label>
+                        <div class="card border-danger bg-dark  mb-3">
+                        <div class="card-header text-light">Header</div>
+                        <div class="card-body text-light">
+                            <h5 class="card-title">Danger card title</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        </div>
+                        </div>
 
                            
-                            <label className="bg-dark text-light list-group-item py-3" for="listGroupCheckableRadios2">
-                                Second radio
-                                <span className="d-block small opacity-50">Some other text goes here</span>
-                            </label>
-
-                         
-                            <label className="bg-dark text-light list-group-item py-3" for="listGroupCheckableRadios3">
-                                Third radio
-                                <span className="d-block small opacity-50">And we end with another snippet of text</span>
-                            </label>
-
-                            
-                            <label className="bg-dark text-light list-group-item py-3" for="listGroupCheckableRadios4">
-                                Fourth disabled radio
-                                <span className="d-block small opacity-50">This option is disabled</span>
-                            </label>
+                           
                         </div>
 
                     </div>
                     <div className="col-6 container-fluid">
                         <div className="container-fluid">
-                            <h4 className="text-light">Productos en Venta</h4>
-                            <div className="d-flex gap-5 justify-content-center">
-                                <div className="list-group mx-0">
-                                    <label className="bg-dark text-light list-group-item d-flex gap-2">
-                                       
-                                        <span>
-                                            First checkbox
-                                            <small className="d-block text-muted">With support text underneath to add more
-                                                detail</small>
-                                        </span>
-                                    </label>
-                                    <label className="bg-dark text-light list-group-item d-flex gap-2">
-                                       
-                                        <span>
-                                            Second checkbox
-                                            <small className="d-block text-muted">Some other text goes here</small>
-                                        </span>
-                                    </label>
-                                    <label className="bg-dark text-light list-group-item d-flex gap-2">
+
+                            <h4 className="text-light" id="titulo-prod" >Productos en Venta</h4>
+                            {
+
+                                productos.map((u) => (
+                                <div className="card-group d-flex gap-2 justify-content-center">
+                                
+                                    <div class="card border-danger bg-dark  mb-3">                    
+                                        <div class="card-body text-light">
+                                            <h5 class="card-title">{u.nombre}</h5>
+                                            <p>{u.descripcion}</p>
+                                        
+                                        </div>
+                                
                                     
-                                        <span>
-                                            Third checkbox
-                                            <small className="d-block text-muted">And we end with another snippet of
-                                                text</small>
-                                        </span>
-                                    </label>
-                                </div>
+                                    </div>
 
-                                <div className="bg-dark text-light list-group mx-0">
-                                    <label className="bg-dark text-light list-group-item d-flex gap-2">
+                                    <div className="bg-dark text-light list-group mx-0">
+                                    <div class="card border-danger bg-dark  mb-3">                    
+                                        <div class="card-body text-light bg-dark  d-flex gap-2">
                                         <button className="btn btn-outline-danger reduceInput">+</button>
-                                        <button className="btn btn-outline-danger reduceInput">-</button>
-                                        <input type="number" className="reduceInput form-control"/>
-                                    </label>
-
-                                    <label className="bg-dark text-light list-group-item d-flex gap-2">
-                                        <button className="btn btn-outline-danger reduceInput">+</button>
-                                        <button className="btn btn-outline-danger reduceInput">-</button>
-                                        <input type="number" className="reduceInput form-control"/>
-                                    </label>
-                                    <label className="bg-dark text-light list-group-item d-flex gap-2">
-                                        <button className="btn btn-outline-danger reduceInput">+</button>
-                                        <button className="btn btn-outline-danger reduceInput">-</button>
-                                        <input type="number" className="reduceInput form-control"/>
-                                    </label>
+                                            <button className="btn btn-outline-danger reduceInput">-</button>
+                                            <input type="number" className="reduceInput form-control"/>
+                                        </div>
+                                    
+                                    </div>
+                                    
+                                    </div>
                                 </div>
-                            </div>
+                                ))
+                            }
                         </div>
                         <hr/>
                         <div className="headertekst">
                             <h4 className="text-light">Datos del Cliente</h4>
                             <label className="text-light" for="">Nombre:</label>
-                            <label for=""></label><br/>
-                            <label className="text-light" for="">Documento:</label>
+                            <input type="text" className="reduceInput form-control"/>
                             <label for=""></label>
+                            <label className="text-light" for="">Documento:</label><br/>
+                            <input type="number" className="reduceInput form-control"/>
+                            <label className="text-light" for="">Telefono:</label>
+                            <input type="number" className="reduceInput form-control"/>
+                            
                             <hr/>
-                            <h4 className="headertekst text-light">Total</h4>
+                            <h4 className="text-light">Total</h4>
                             <div class="col-6 input-group mb-3">
                               <input type="number" className="form-control"/>
                               <button type="button" className="btn btn-outline-danger">Ver resumen</button>

@@ -9,6 +9,7 @@ function Productos() {
   const [user, loading, error] = useAuthState(auth);
   const [name, setName] = useState("");
   const[rol,setRol] = useState("");
+  const [productos, setProductos] = React.useState([]); 
   const history = useHistory();
   const fetchUserName = async () => {
     try {
