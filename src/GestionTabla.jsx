@@ -194,21 +194,28 @@ function GestionTabla() {
         <div className="col-md-3 col-sm-12 bg-dark container mt-2">
           <label className="text-light d-flex mt-4 mb-2">Identificacion</label>
           <input className="form-control container" id="disabledInput" type="text" placeholder={usuario.id} disabled />
-          <label className="text-light d-flex mt-2 mb-2">Correo</label>
+          <label className="text-light d-flex mt-4 mb-2">Correo</label>
           <input className="form-control container" id="disabledInput" type="text" placeholder={usuario.email} disabled />
           <form>
-            <select className="custom-select mt-3" onChange={handleEstado}>
+            <div className="row">
+            <label className="form-label text-light col-4 mt-4">Estado: </label>
+            <select className="custom-select mt-4 col-7" onChange={handleEstado}>
               <option selected hidden>{usuario.estado}</option>
               <option value="Pendiente">Pendiente</option>
               <option value="Autorizado">Autorizado</option>
               <option value="No autorizado">No autorizado</option>
             </select>
-            <select className="custom-select mt-3" onChange={handleRol}>
+            </div>
+            <hr className="mb-2"/>
+            <div className="row">
+            <label className="form-label text-light col-4">Rol:</label>
+            <select className="custom-select col-7" onChange={handleRol}>
               <option selected hidden>{usuario.rol}</option>
               <option value="Vendedor">Vendedor</option>
               <option value="Administrador">Administrador</option>
             </select>
-            <div className="mt-3 mb-3">
+            </div>
+            <div className="mt-4 mb-3">
               <a role="button" type="submit" className="btn btn-dark btn-outline-danger" title="Guardar edicion" data-toggle="modal" data-target="#guardarEdicion"
                 onClick={handleEdicionUsuario}
               >Guardar
