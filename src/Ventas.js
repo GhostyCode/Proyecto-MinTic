@@ -48,7 +48,7 @@ function Ventas() {
 
     async function postData() {
 
-        setProdutos(await consultarDatabase('products'));
+        setListaProductos(await consultarDatabase('products'));
 
     };
     const history = useHistory();
@@ -74,12 +74,15 @@ function Ventas() {
         if (!user) return history.replace("/");
         fetchUserName();
         postData()
+
        handleAgregarProducto()
     }, [user,productoNuevo, loading, history]);
 
     // const cargarProducto = async () => {
     //     const productoTemporal = await consultarDatabase()
     // }
+
+    const [listaProductos, setListaProductos] = useState([])
 
     return (
         <>
@@ -114,6 +117,7 @@ function Ventas() {
                                     {
                   productos.map((u) => (
                                     <div className="container mb-2">
+
                                         <div className="card mb-2 " >
                                             <img className="card-img-top"
                                                 src= "https://img.favpng.com/11/13/14/architectural-engineering-building-computer-software-clip-art-png-favpng-kT0HSNKnv6kte1r5B1YEY1FAY.jpg"
@@ -129,6 +133,7 @@ function Ventas() {
                                                  onClick={() => {setProductoNuevo(u)}}>Añadir</button>
                                             </div>
                                         </div>
+
                                     </div>
                   ))} 
                                 </div>
@@ -207,5 +212,5 @@ function Ventas() {
             </div>
         </>
     );
-    }
-    export default Ventas;
+}
+export default Ventas;
