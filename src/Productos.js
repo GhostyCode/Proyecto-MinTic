@@ -5,7 +5,7 @@ import "./Ventas.css";
 import { auth, db, logout } from "./firebase";
 import NavBar from "./NavBar";
 import NavBarLateral from "./NavBarLateral";
-import {consultarDatabase,actualizarDocumentoDatabase } from "./firebase";
+import { consultarDatabase, actualizarDocumentoDatabase } from "./firebase";
 
 function Productos() {
 
@@ -40,11 +40,11 @@ function Productos() {
 
     const [listaProductos, setListaProductos] = useState([])
 
-    async function  postData()  {
-    
+    async function postData() {
+
         setListaProductos(await consultarDatabase('products'));
-          
-      };
+
+    };
 
     const [productoNuevo, setProductoNuevo] = useState({
         id: '',
@@ -170,15 +170,15 @@ function Productos() {
     }
 
     const handleBuscarProducto = () => {
-       
-        const buscado = listaProductos.find((item)=>{
+
+        const buscado = listaProductos.find((item) => {
             return item.id === idEditado
-          })
+        })
 
         setProductoEditar(buscado)
     }
 
-    const handleIdProductoBuscado = (e) =>{
+    const handleIdProductoBuscado = (e) => {
         setIdEditado(e.target.value)
     }
 
@@ -201,9 +201,9 @@ function Productos() {
                             <h2 className="headertekst text-light">Buscar Producto</h2>
                             <div className="col-6 container-fluid">
                                 <div class="col-6 input-group mb-3">
-                                    <input type="text" className="form-control" onChange={handleIdProductoBuscado}/>
+                                    <input type="text" className="form-control" onChange={handleIdProductoBuscado} />
                                     <a role="button" type="submit" className="btn btn-dark btn-outline-danger" title="Buscar Usuario" data-toggle="modal" data-target="#editarProducto"
-                                    onclick={handleBuscarProducto}
+                                        onclick={handleBuscarProducto}
                                     >
                                         Buscar
                                     </a>
@@ -240,7 +240,7 @@ function Productos() {
                             <div className="col-6 container">
                                 <div className="container  bg-dark text-light">
 
-                                    <h4 className="text-light pt-4">Crear Producto</h4>
+                                    <h4 className="text-light pt-4">Registrar Producto</h4>
 
                                     <form>
                                         <div className="form-group mt-3">
@@ -260,7 +260,7 @@ function Productos() {
                                             <textarea className="form-control" rows="3" onChange={handleCrearDescripcion} value={productoNuevo.descripcion} />
                                         </div>
                                         <div className="pb-4">
-                                            <a className="btn btn-dark btn-outline-danger" onClick={handleCrearUsuario} >
+                                            <a className="btn btn-dark btn-outline-danger" data-toggle="modal" data-target="#registrarProducto" onClick={handleCrearUsuario} >
                                                 Guardar
                                             </a>
                                         </div>
@@ -299,7 +299,7 @@ function Productos() {
                                             </div>
                                             <div className="modal-footer bg-secondary">
                                                 <button type="button" className="close btn-dark" data-dismiss="modal"
-                                                    aria-label="Close" onclick={handleEditarProducto}>Guardar Cambios</button>
+                                                    aria-label="Close" data-bs-toggle="modal" href= "#notificacionEditadoProducto" onclick={handleEditarProducto}>Guardar Cambios</button>
                                                 <button type="button" className="close btn-dark" data-dismiss="modal"
                                                     aria-label="Close">Cancelar</button>
                                             </div>
@@ -338,9 +338,39 @@ function Productos() {
                                             </div>
                                             <div className="modal-footer bg-secondary">
                                                 <button type="button" className="close btn-dark" data-dismiss="modal"
-                                                    aria-label="Close" onclick={handleEditarProducto}>Guardar Cambios</button>
+                                                    aria-label="Close" data-toggle="modal" data-target= "#notificacionEditadoProducto" onclick={handleEditarProducto}>Guardar Cambios</button>
                                                 <button type="button" className="close btn-dark" data-dismiss="modal"
                                                     aria-label="Close">Cancelar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="modal fade" id="registrarProducto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                    aria-hidden="true">
+                                    <div className="modal-dialog" role="document">
+                                        <div className="modal-content">
+                                            <div className="modal-header">
+                                                <h5 className="modal-title" id="exampleModalLabel">Producto registrado con éxito</h5>
+                                            </div>
+                                            <div className="modal-footer">
+                                                <button type="button" className="close btn-dark" data-dismiss="modal"
+                                                    aria-label="Close">Cerrar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="modal fade" id="notificacionEditadoProducto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                    aria-hidden="true">
+                                    <div className="modal-dialog" role="document">
+                                        <div className="modal-content">
+                                            <div className="modal-header">
+                                                <h5 className="modal-title" id="exampleModalLabel">Producto editado con éxito</h5>
+                                            </div>
+                                            <div className="modal-footer">
+                                                <button type="button" className="close btn-dark" data-dismiss="modal"
+                                                    aria-label="Close">Cerrar</button>
                                             </div>
                                         </div>
                                     </div>

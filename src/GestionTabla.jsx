@@ -20,11 +20,11 @@ function GestionTabla() {
 
 
 
-  async function  postData()  {
-    
-    setUsuarios (await consultarDatabase('products'));
+    async function  postData()  {
       
-  };
+      setUsuarios (await consultarDatabase('users'));
+        
+    };
 
 
   const [usuario, setUsuario] = React.useState({
@@ -146,14 +146,14 @@ function GestionTabla() {
               <br/>
               <br/>
               <h4 className="headertekst text-light">Buscar Usuario</h4>
-              <div class="buscar-group input-group mb-6 " >
+              <div className="buscar-group input-group mb-6 " >
                 <input className="" type="text" placeholder="Busqueda por ID" onChange={handleBuscador} value={idBuscada}/>
                 <button className="btn btn-dark btn-outline-secondary ml-3">Buscar</button>
               </div>
             </form>
           </div>
           <div className="container mt-4">
-            <table className="table table-striped table-dark table-responsive">
+            <table className="table table-sm table-striped table-dark align-middle">
 
               <thead className="thead-dark">
                 <tr>
