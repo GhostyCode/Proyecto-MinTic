@@ -6,6 +6,7 @@ import { auth, db, logout } from "./firebase";
 import NavBar from "./NavBar";
 import NavBarLateral from "./NavBarLateral";
 import { consultarDatabase, actualizarDocumentoDatabase } from "./firebase";
+import productos from "./productos.jpg"
 function Ventas() {
     const [user, loading, error] = useAuthState(auth);
     const [name, setName] = useState("");
@@ -77,7 +78,7 @@ function Ventas() {
                                     <div className="container mb-2">
                                         <div className="card mb-2 " >
                                             <img className="card-img-top"
-                                                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzzEdD3TmX1xLHrHHk3Qrd5onaDHBpfFGrSQ&usqp=CAU"
+                                                src= {productos}
                                                 alt="imagen producto"
                                             />
                                             <div class="card-body justify-content">
