@@ -32,6 +32,10 @@
     height: 40px;
   }
 
+#titulo-prod{
+  border-bottom-width: 10px;
+  margin-bottom: 25px;
+}
 
 .boton_seccion{
   color: #dcdcdc;

@@ -5,19 +5,19 @@ import "./Ventas.css";
 import { auth, db, logout } from "./firebase";
 import NavBar from "./NavBar";
 import NavBarLateral from "./NavBarLateral";
-import {consultarDatabase,actualizarDocumentoDatabase } from "./firebase";
+import { consultarDatabase, actualizarDocumentoDatabase } from "./firebase";
 function Ventas() {
     const [user, loading, error] = useAuthState(auth);
     const [name, setName] = useState("");
     const [productos, setProdutos] = useState([]);
 
-    async function  postData()  {
-      
-      setProdutos (await consultarDatabase('products'));
-        
+    async function postData() {
+
+        setProdutos(await consultarDatabase('products'));
+
     };
     const history = useHistory();
-    
+
     const fetchUserName = async () => {
         try {
             const query = await db
@@ -40,10 +40,10 @@ function Ventas() {
         fetchUserName();
     }, [user, loading, history]);
 
-    const cargarProducto = async () => {
-        const productoTemporal = await consultarDatabase()
-    }
-    
+    // const cargarProducto = async () => {
+    //     const productoTemporal = await consultarDatabase()
+    // }
+
     return (
         <>
             <div>
@@ -148,11 +148,10 @@ function Ventas() {
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
         </>
     );
-}
-export default Ventas;
+    }
+    export default Ventas;
