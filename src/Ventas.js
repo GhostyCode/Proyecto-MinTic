@@ -93,8 +93,8 @@ function Ventas() {
                                 </div>
 
                                 <div className="col-6 container border">
-                                    <div className="container-fluid border">
-                                        <h4 className="text-light">Productos en Venta</h4>
+                                    <div className="container-fluid ">
+                                        <h4 className="text-light">Resumen de Venta</h4>
                                         <div className="d-flex gap-5 justify-content-center border">
                                             <table className="table text-white">
                                                 <thead>
@@ -114,20 +114,26 @@ function Ventas() {
                                             </table>
                                         </div>
                                     </div>
-                                    <hr />
-                                    <div className="headertekst border">
+                                    <hr className="border" />
+                                    <div className="headertekst ">
                                         <h4 className="text-light">Datos del Cliente</h4>
                                         <br />
                                         <div className="row mb-3">
-                                            <label className="col-sm-2 col-form-label col-form-label-sm text-white">Nombre</label>
+                                            <label className="col-sm-2 col-form-label col-form-label-sm text-white">Nombre:</label>
                                             <div className="col-sm-8">
                                                 <input type="text" className="form-control form-control-sm" />
                                             </div>
                                         </div>
                                         <div className="row mb-3">
-                                            <label className="col-sm-2 col-form-label col-form-label-sm text-white">Documento</label>
+                                            <label className="col-sm-2 col-form-label col-form-label-sm text-white">Documento:</label>
                                             <div className="col-sm-8">
-                                                <input type="text" className="form-control form-control-sm" />
+                                                <input type="number" className="form-control form-control-sm" />
+                                            </div>
+                                        </div>
+                                        <div className="row mb-3">
+                                            <label className="col-sm-2 col-form-label col-form-label-sm text-white">Teléfono:</label>
+                                            <div className="col-sm-8">
+                                                <input type="number" className="form-control form-control-sm" />
                                             </div>
                                         </div>
                                     </div>
@@ -138,10 +144,10 @@ function Ventas() {
 
                                         <form className="row g-12">
                                             <div className="col-auto">
-                                                <input type="text" className="form-control" placeholder="Buscar" />
+                                                <input type="text" className="form-control" placeholder="Total" />
                                             </div>
                                             <div className="col-auto">
-                                                <button className="btn btn-outline-danger mb-3">Buscar</button>
+                                                <button className="btn btn-outline-danger mb-3">Guardar</button>
                                             </div>
                                         </form>
                                     </div>
