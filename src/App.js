@@ -5,6 +5,7 @@ import Login from "./Login";
 import Register from "./Register";
 import Reset from "./Reset";
 import Ventas from "./Ventas";
+import ListaVentas from "./ListaVentas";
 import GestionTabla from "./GestionTabla";
 import Productos from "./Productos";
 
@@ -17,6 +18,7 @@ function App() {
            <Route exact path="/register" component={Register} />
            <Route exact path="/reset" component={Reset} />
            <Route exact path="/ventas" component={Ventas} />
+           <Route exact path="/listaventas" component={ListaVentas} />
            <Route exact path="/gestionusuarios" component={GestionTabla} />
            <Route exact path="/productos" component={Productos} />
          

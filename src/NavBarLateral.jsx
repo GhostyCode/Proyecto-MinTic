@@ -41,8 +41,13 @@ function NavBarLateral() {
               <div className="boton_seccion">
                 <img src={venta} alt="" width="25em" height="25em" />
                 <Link to="/ventas">Ventas</Link>
+                
               </div>
             </a>
+            {
+               rol==="Administrador" &&
+             <Link to="/listaventas">Lista Ventas</Link>
+            }
           </li>
           {
             rol==="Administrador" &&

@@ -8,7 +8,8 @@ import "./GestionTabla.css";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, useHistory } from "react-router-dom";
 import { auth, db, logout } from "./firebase";
-
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
 
 function GestionTabla() {
@@ -17,10 +18,12 @@ function GestionTabla() {
 
 
    const [usuarios, setUsuarios] = React.useState([]); 
+   const MySwal = withReactContent(Swal);
 
 
-
-    async function  postData()  {
+  async function  postData()  {
+    
+    setUsuarios (await consultarDatabase('users'));
       
       setUsuarios (await consultarDatabase('users'));
         
@@ -38,10 +41,6 @@ function GestionTabla() {
 
   const [idCambiada, setIdCambiada] = React.useState('');
   const [idBuscada, setIdBuscada] = React.useState('');
-
-  //  const [listaUsuarios, setListaUsuarios] = React.useState([]);
-
-  // setListaUsuarios(usuarios); 
 
   const handleBuscador = (e) =>{
     setIdBuscada(e.target.value)
@@ -102,6 +101,12 @@ function GestionTabla() {
 
     actualizarDocumentoDatabase("users",usuario.id,data);
     setUsuarios(listaTemporal)
+    await MySwal.fire({
+      title: <strong>Exito!</strong>,
+      html: <i>Se actualizó el usuario correctamente!</i>,
+      icon: 'success'
+    })
+
   }
 
   const [user, loading, error] = useAuthState(auth);
@@ -212,8 +217,7 @@ function GestionTabla() {
             </select>
             </div>
             <div className="mt-4 mb-3">
-              <a role="button" type="submit" className="btn btn-dark btn-outline-danger" title="Guardar edicion" data-toggle="modal" data-target="#guardarEdicion"
-                onClick={handleEdicionUsuario}
+              <a role="button" type="submit" className="btn btn-dark btn-outline-danger" title="Guardar edicion" onClick={handleEdicionUsuario}
               >Guardar
               </a>
             </div>

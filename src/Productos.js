@@ -5,7 +5,11 @@ import "./Ventas.css";
 import { auth, db, logout } from "./firebase";
 import NavBar from "./NavBar";
 import NavBarLateral from "./NavBarLateral";
-import { consultarDatabase, actualizarDocumentoDatabase } from "./firebase";
+import {consultarDatabase,actualizarDocumentoDatabase,addDocumentoDatabase } from "./firebase";
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+import Modal from 'react-bootstrap/modal'
+
 
 function Productos() {
 
@@ -13,6 +17,13 @@ function Productos() {
     const [name, setName] = useState("");
     const [rol, setRol] = useState("");
     const history = useHistory();
+    const MySwal = withReactContent(Swal);
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
+
     const fetchUserName = async () => {
         try {
             const query = await db
@@ -105,13 +116,21 @@ function Productos() {
         })
     }
 
-    const handleCrearUsuario = () => {
+    const handleCrearProducto = async () => {
         console.log(productoNuevo)
 
         setListaProductos([
             ...listaProductos,
             productoNuevo
         ])
+        addDocumentoDatabase('products',productoNuevo);
+
+        await MySwal.fire({
+            title: <strong>Exito!</strong>,
+            html: <i>Se creó el producto correctamente!</i>,
+            icon: 'success'
+          })
+
         setProductoNuevo({
             id: '',
             nombre: '',
@@ -162,11 +181,24 @@ function Productos() {
         })
     }
 
-    const handleEditarProducto = () => {
+    const handleEditarProducto = async () => {
+        console.log(productoEditar)
         const listaTemporal = listaProductos.map((item) => {
             return item.id === idEditado ? productoEditar : item
         })
+       
+        let data=listaTemporal.find((item)=>{
+            return item.id === idEditado ? productoEditar : item
+          })
+       // console.log(data)
+        productoEditar.id=data.id
+        actualizarDocumentoDatabase("products",data.id,productoEditar);
         setListaProductos(listaTemporal)
+        await MySwal.fire({
+            title: <strong>Exito!</strong>,
+            html: <i>Se actualizó el producto correctamente!</i>,
+            icon: 'success'
+          })
     }
 
     const handleBuscarProducto = () => {
@@ -222,11 +254,12 @@ function Productos() {
                                                     <p className="mb-1">{p.descripcion}</p>
                                                     <small>Costo: {p.precio}</small>
                                                     <div className="">
-                                                        <a type="submit" className="btn btn-dark btn-outline-danger" data-toggle="modal" data-target="#editarProducto"
-                                                            onClick={() => { setProductoEditar(p) }}
+                                                    
+                                                        <button type="submit" className="btn btn-dark btn-outline-danger" 
+                                                            onClick={handleShow}
                                                         >
                                                             editar
-                                                        </a>
+                                                        </button>
                                                     </div>
 
                                                 </li>
@@ -260,13 +293,48 @@ function Productos() {
                                             <textarea className="form-control" rows="3" onChange={handleCrearDescripcion} value={productoNuevo.descripcion} />
                                         </div>
                                         <div className="pb-4">
-                                            <a className="btn btn-dark btn-outline-danger" data-toggle="modal" data-target="#registrarProducto" onClick={handleCrearUsuario} >
+                                            <a className="btn btn-dark btn-outline-danger" onClick={handleCrearProducto} >
                                                 Guardar
                                             </a>
                                         </div>
                                     </form>
                                 </div>
                                 <hr />
+                                <Modal  animation={false} show={show} onHide={handleClose} backdrop="static" keyboard={false}>
+                                    <Modal.Header className="bg-secondary text-light" closeButton>
+                                        <Modal.Title>Editar producto</Modal.Title>
+                                    </Modal.Header>
+                                    <Modal.Body className="bg-dark text-light">
+                                    <form>
+                                                    <div className="form-group mt-3">
+                                                        <label className="mb-2">Nombre:</label>
+                                                        <input type="text" className="form-control" placeholder={productoEditar.nombre} onChange={handleEditarNombre} />
+                                                    </div>
+                                                    <div className="form-group mt-3">
+                                                        <label className="mb-2">Precio: </label>
+                                                        <input type="text" className="form-control" placeholder={productoEditar.precio} onChange={handleEditarPrecio} />
+                                                    </div>
+                                                    <div className="form-group mt-3">
+                                                        <label className="mb-2">Cantidad: </label>
+                                                        <input type="text" className="form-control" placeholder={productoEditar.cantidad} onChange={handleEditarCantidad} />
+                                                    </div>
+                                                    <div className="form-group pb-5 mt-3">
+                                                        <label className="mb-2">Descripcion: </label>
+                                                        <textarea className="form-control" rows="3" placeholder={productoEditar.descripcion} onChange={handleEditarDescripcion}></textarea>
+                                                    </div>
+                                                </form>
+                                     
+                                    </Modal.Body>
+                                    <Modal.Footer className="bg-secondary text-light">
+                                    <button type="button" className="close btn-dark" data-dismiss="modal"
+                                                    aria-label="Close" onClick={handleEditarProducto}>Guardar Cambios</button>
+                                               
+                                    <button type="button" className="close btn-dark" onClick={handleClose}>
+                                        Close
+                                    </button>
+                                
+                                    </Modal.Footer>
+                                </Modal>
 
                                 {/* MODAL EDITAR A TRAVÉS DE LA BUSQUEDA */}
 
@@ -293,7 +361,7 @@ function Productos() {
                                                     </div>
                                                     <div class="form-group pb-5 mt-3">
                                                         <label className="mb-2">Descripcion: </label>
-                                                        <textarea class="form-control" rows="3" onChange={handleEditarDescripcion}></textarea>
+                                                        <textarea className="form-control" rows="3" onChange={handleEditarDescripcion}></textarea>
                                                     </div>
                                                 </form>
                                             </div>
@@ -309,7 +377,10 @@ function Productos() {
 
                                 {/* MODAL EDITAR A TRAVÉS DEL BOTON */}
 
-                                <div className="modal fade" id="editarProducto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                
+
+                               
+                                <div className="modal-dialog modal-lg ts-modal modal-dialog-centered" id="editarProducto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                                     aria-hidden="true">
                                     <div className="modal-dialog" role="document">
                                         <div className="modal-content">
@@ -318,27 +389,27 @@ function Productos() {
                                             </div>
                                             <div className="modal-body bg-dark text-light">
                                                 <form>
-                                                    <div class="form-group mt-3">
+                                                    <div className="form-group mt-3">
                                                         <label className="mb-2">Nombre:</label>
-                                                        <input type="text" class="form-control" placeholder={productoEditar.nombre} onChange={handleEditarNombre} />
+                                                        <input type="text" className="form-control" placeholder={productoEditar.nombre} onChange={handleEditarNombre} />
                                                     </div>
-                                                    <div class="form-group mt-3">
+                                                    <div className="form-group mt-3">
                                                         <label className="mb-2">Precio: </label>
-                                                        <input type="text" class="form-control" placeholder={productoEditar.precio} onChange={handleEditarPrecio} />
+                                                        <input type="text" className="form-control" placeholder={productoEditar.precio} onChange={handleEditarPrecio} />
                                                     </div>
-                                                    <div class="form-group mt-3">
+                                                    <div className="form-group mt-3">
                                                         <label className="mb-2">Cantidad: </label>
-                                                        <input type="text" class="form-control" placeholder={productoEditar.cantidad} onChange={handleEditarCantidad} />
+                                                        <input type="text" className="form-control" placeholder={productoEditar.cantidad} onChange={handleEditarCantidad} />
                                                     </div>
-                                                    <div class="form-group pb-5 mt-3">
+                                                    <div className="form-group pb-5 mt-3">
                                                         <label className="mb-2">Descripcion: </label>
-                                                        <textarea class="form-control" rows="3" placeholder={productoEditar.descripcion} onChange={handleEditarDescripcion}></textarea>
+                                                        <textarea className="form-control" rows="3" placeholder={productoEditar.descripcion} onChange={handleEditarDescripcion}></textarea>
                                                     </div>
                                                 </form>
                                             </div>
                                             <div className="modal-footer bg-secondary">
-                                                <button type="button" className="close btn-dark" data-dismiss="modal"
-                                                    aria-label="Close" data-toggle="modal" data-target= "#notificacionEditadoProducto" onclick={handleEditarProducto}>Guardar Cambios</button>
+                                                <button type="button"                                                                                                   
+                                                onclick={handleEditarProducto}>Guardar Cambios</button>
                                                 <button type="button" className="close btn-dark" data-dismiss="modal"
                                                     aria-label="Close">Cancelar</button>
                                             </div>

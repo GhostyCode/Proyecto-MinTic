@@ -4,6 +4,8 @@ import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 import 'firebase/compat/functions';
 import { addDoc, collection, getDocs, query, getDoc, doc, updateDoc, deleteDoc } from 'firebase/firestore'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
 
 // Import the functions you need from the SDKs you need
@@ -23,7 +25,7 @@ const auth = firebase.auth();
 const db = firebase.firestore();     
 const googleProvider = new firebase.auth.GoogleAuthProvider();
 // firebase.functions().useEmulator("localhost", 5001);
-  
+const MySwal = withReactContent(Swal)
 
 const consultarDatabase = async (nombreColeccion )=>{
   try{
@@ -50,8 +52,8 @@ const consultarDatabase = async (nombreColeccion )=>{
 
 const actualizarDocumentoDatabase  = async (nombreColeccion, id, data )=>{
   try {
-    console.log(data.rol);
-    console.log(data.estado);
+    console.log(data);
+ 
     //const respuesta = await updateDoc(doc(db, nombreColeccion, id), data)
     await db.collection(nombreColeccion).doc(id).update(data);
     
@@ -60,7 +62,17 @@ const actualizarDocumentoDatabase  = async (nombreColeccion, id, data )=>{
   }
 }
 
+const addDocumentoDatabase  = async (nombreColeccion, data )=>{
+  try {
+    console.log(data);
+ 
 
+    await db.collection(nombreColeccion).add(data);
+    
+  } catch (e) {
+    throw new Error(e)
+  }
+}
 
 const signInWithGoogle = async () => {
   try {
@@ -116,7 +128,12 @@ const signInWithEmailAndPassword = async (email, password) => {
   const sendPasswordResetEmail = async (email) => {
     try {
       await auth.sendPasswordResetEmail(email);
-      alert("Password reset link sent!");
+      
+      await MySwal.fire({
+        title: <strong>Exito!</strong>,
+        html: <i>Se envió el link de reiniciar contraseña a su correo!</i>,
+        icon: 'success'
+      })
     } catch (err) {
       console.error(err);
       alert(err.message);
@@ -136,5 +153,6 @@ const signInWithEmailAndPassword = async (email, password) => {
     sendPasswordResetEmail,
     logout,
     consultarDatabase,
-    actualizarDocumentoDatabase
+    actualizarDocumentoDatabase,
+    addDocumentoDatabase
   };
