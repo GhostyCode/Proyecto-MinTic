@@ -6,11 +6,45 @@ import { auth, db, logout } from "./firebase";
 import NavBar from "./NavBar";
 import NavBarLateral from "./NavBarLateral";
 import { consultarDatabase, actualizarDocumentoDatabase } from "./firebase";
-import productos from "./productos.jpg"
+import imgproductos from "./productos.png"
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 function Ventas() {
+    const [usuarios, setUsuarios] = React.useState([]); 
+   const MySwal = withReactContent(Swal);
     const [user, loading, error] = useAuthState(auth);
     const [name, setName] = useState("");
     const [productos, setProdutos] = useState([]);
+    const [productossele, setProdutossele] = useState([]);
+    const [productoNuevo, setProductoNuevo] = useState({
+        id: '',
+        nombre: '',
+        precio: '',
+        cantidad: '',
+        descripcion: ''
+    })
+
+    const handleAgregarProducto =  () => {
+     
+        console.log(productoNuevo)
+       
+        setProdutossele([
+            ...productossele,
+            productoNuevo
+        ])
+       
+
+    }
+    const handlerGuardarVenta = async () => {
+     
+        await MySwal.fire({
+            title: <strong>Exito!</strong>,
+            html: <i>Se creó la venta correctamente!</i>,
+            icon: 'success'
+          })
+       
+
+    }
 
     async function postData() {
 
@@ -39,7 +73,9 @@ function Ventas() {
         }
         if (!user) return history.replace("/");
         fetchUserName();
-    }, [user, loading, history]);
+        postData()
+       handleAgregarProducto()
+    }, [user,productoNuevo, loading, history]);
 
     // const cargarProducto = async () => {
     //     const productoTemporal = await consultarDatabase()
@@ -75,22 +111,26 @@ function Ventas() {
                                     <div className="container-fluid text-white">
                                         <h2>Productos</h2>
                                     </div>
+                                    {
+                  productos.map((u) => (
                                     <div className="container mb-2">
                                         <div className="card mb-2 " >
                                             <img className="card-img-top"
-                                                src= {productos}
+                                                src= "https://img.favpng.com/11/13/14/architectural-engineering-building-computer-software-clip-art-png-favpng-kT0HSNKnv6kte1r5B1YEY1FAY.jpg"
                                                 alt="imagen producto"
+                                                width="100em" height="200em"
                                             />
                                             <div class="card-body justify-content">
-                                                <h4 class="card-title">Apartamento 3 alcobas</h4>
-                                                <p class="card-text">Apartamento con 3 alcobas</p>
-                                                <p class="card-text">Cocina, salacomedor y balcon</p>
-                                                <p class="card-text">Dos baños uno privado</p>
-                                                <p class="card-text">Valor: $95.684.325</p>
-                                                <button class="btn btn-outline-success">Añadir</button>
+                                                <h4 class="card-title">{u.nombre}</h4>
+                                                <p class="card-text">{u.descripcion}</p>
+                                                <p class="card-text">${u.precio}</p>
+                                               
+                                                <button class="btn btn-outline-success"
+                                                 onClick={() => {setProductoNuevo(u)}}>Añadir</button>
                                             </div>
                                         </div>
                                     </div>
+                  ))} 
                                 </div>
 
                                 <div className="col-6 container border">
@@ -102,16 +142,22 @@ function Ventas() {
                                                     <th>Producto</th>
                                                     <th>Cantidad</th>
                                                 </thead>
+                                                
                                                 <tbody>
-                                                    <tr>
-                                                        <td>Apartamento 2 alcobas</td>
+                                                {
+                                                           productossele.map((u) => (
+                                                    <tr  key={u.id}>
+                                                        <td>{u.nombre}</td>
                                                         <td>
                                                             <div className="co-auto">
                                                                 <input type="number" className="reduceInput" />
                                                             </div>
                                                         </td>
                                                     </tr>
+                                                           ))
+                                                           }  
                                                 </tbody>
+                                                
                                             </table>
                                         </div>
                                     </div>
@@ -148,7 +194,8 @@ function Ventas() {
                                                 <input type="text" className="form-control" placeholder="Total" />
                                             </div>
                                             <div className="col-auto">
-                                                <button className="btn btn-outline-danger mb-3">Guardar</button>
+                                                <button className="btn btn-outline-danger mb-3"
+                                                  onClick={handlerGuardarVenta}>Guardar</button>
                                             </div>
                                         </form>
                                     </div>
