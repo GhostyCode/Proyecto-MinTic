@@ -22,7 +22,7 @@ function GestionTabla() {
 
   async function  postData()  {
     
-    setUsuarios (await consultarDatabase('users'));
+    setUsuarios (await consultarDatabase('products'));
       
   };
 
@@ -135,10 +135,6 @@ function GestionTabla() {
 
 
 
-
-
-
-
   return (
     <>
       <div><NavBar /></div>
@@ -242,6 +238,9 @@ function GestionTabla() {
 
     </>
   )
+
+
+  
 }
 
 export default GestionTabla

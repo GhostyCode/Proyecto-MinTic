@@ -48,7 +48,7 @@ function NavBarLateral() {
             rol==="Administrador" &&
                 <li className="nav-item">
             <a className="nav-link active" aria-current="page" href='../' > 
-            <div class="boton_seccion">
+            <div className="boton_seccion">
               <img src={producto} alt="" width="25em" height="25em" />
               <Link to="/productos">Productos</Link>
             </div>

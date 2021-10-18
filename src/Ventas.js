@@ -34,8 +34,8 @@ function Ventas() {
      <><div>
       <NavBar />
     </div>
-    <div class="container-fluid">
-        <div class="row">
+    <div className="container-fluid">
+        <div className="row">
           <NavBarLateral/>
           <main className="main col-md-9 ms-sm-auto col-lg-10 px-md-4">
           <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -50,7 +50,7 @@ function Ventas() {
                 <h2 className="headertekst-ventas text-light">Buscar Ventas</h2>
                 <div className="row">
                     <div className="col-6 container-fluid">
-                    <div class="col-6 input-group mb-3">
+                    <div className="col-6 input-group mb-3">
                         <input type="text" className="form-control"/>
                         <button className="btn btn-outline-danger" type="button">Buscar</button>
                       </div>
@@ -141,7 +141,7 @@ function Ventas() {
                             <label for=""></label>
                             <hr/>
                             <h4 className="headertekst text-light">Total</h4>
-                            <div class="col-6 input-group mb-3">
+                            <div className="col-6 input-group mb-3">
                               <input type="number" className="form-control"/>
                               <button type="button" className="btn btn-outline-danger">Ver resumen</button>
                             </div>
