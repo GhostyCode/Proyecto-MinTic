@@ -5,10 +5,11 @@ import "./Ventas.css";
 import { auth, db, logout } from "./firebase";
 import NavBar from "./NavBar";
 import NavBarLateral from "./NavBarLateral";
-import {consultarDatabase,actualizarDocumentoDatabase } from "./firebase";
+import {consultarDatabase,actualizarDocumentoDatabase,addDocumentoDatabase } from "./firebase";
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import Modal from 'react-bootstrap/modal'
+
 
 function Productos() {
 
@@ -115,13 +116,21 @@ function Productos() {
         })
     }
 
-    const handleCrearUsuario = () => {
+    const handleCrearProducto = async () => {
         console.log(productoNuevo)
 
         setListaProductos([
             ...listaProductos,
             productoNuevo
         ])
+        addDocumentoDatabase('products',productoNuevo);
+
+        await MySwal.fire({
+            title: <strong>Exito!</strong>,
+            html: <i>Se creó el producto correctamente!</i>,
+            icon: 'success'
+          })
+
         setProductoNuevo({
             id: '',
             nombre: '',
@@ -173,17 +182,18 @@ function Productos() {
     }
 
     const handleEditarProducto = async () => {
+        console.log(productoEditar)
         const listaTemporal = listaProductos.map((item) => {
             return item.id === idEditado ? productoEditar : item
         })
-        setListaProductos(listaTemporal)
+       
         let data=listaTemporal.find((item)=>{
             return item.id === idEditado ? productoEditar : item
           })
-        console.log(data)
-
-        actualizarDocumentoDatabase("products",productoEditar.id,data);
-
+       // console.log(data)
+        productoEditar.id=data.id
+        actualizarDocumentoDatabase("products",data.id,productoEditar);
+        setListaProductos(listaTemporal)
         await MySwal.fire({
             title: <strong>Exito!</strong>,
             html: <i>Se actualizó el producto correctamente!</i>,
@@ -283,23 +293,43 @@ function Productos() {
                                             <textarea className="form-control" rows="3" onChange={handleCrearDescripcion} value={productoNuevo.descripcion} />
                                         </div>
                                         <div className="pb-4">
-                                            <a className="btn btn-dark btn-outline-danger" onClick={handleCrearUsuario} >
+                                            <a className="btn btn-dark btn-outline-danger" onClick={handleCrearProducto} >
                                                 Guardar
                                             </a>
                                         </div>
                                     </form>
                                 </div>
                                 <hr />
-                                <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false}>
-                                    <Modal.Header closeButton>
-                                        <Modal.Title>Modal title</Modal.Title>
+                                <Modal  animation={false} show={show} onHide={handleClose} backdrop="static" keyboard={false}>
+                                    <Modal.Header className="bg-secondary text-light" closeButton>
+                                        <Modal.Title>Editar producto</Modal.Title>
                                     </Modal.Header>
-                                    <Modal.Body>
-                                        I will not close if you click outside me. Don't even try to press
-                                        escape key.
+                                    <Modal.Body className="bg-dark text-light">
+                                    <form>
+                                                    <div className="form-group mt-3">
+                                                        <label className="mb-2">Nombre:</label>
+                                                        <input type="text" className="form-control" placeholder={productoEditar.nombre} onChange={handleEditarNombre} />
+                                                    </div>
+                                                    <div className="form-group mt-3">
+                                                        <label className="mb-2">Precio: </label>
+                                                        <input type="text" className="form-control" placeholder={productoEditar.precio} onChange={handleEditarPrecio} />
+                                                    </div>
+                                                    <div className="form-group mt-3">
+                                                        <label className="mb-2">Cantidad: </label>
+                                                        <input type="text" className="form-control" placeholder={productoEditar.cantidad} onChange={handleEditarCantidad} />
+                                                    </div>
+                                                    <div className="form-group pb-5 mt-3">
+                                                        <label className="mb-2">Descripcion: </label>
+                                                        <textarea className="form-control" rows="3" placeholder={productoEditar.descripcion} onChange={handleEditarDescripcion}></textarea>
+                                                    </div>
+                                                </form>
+                                     
                                     </Modal.Body>
-                                    <Modal.Footer>
-                                    <button type="button" onClick={handleClose}>
+                                    <Modal.Footer className="bg-secondary text-light">
+                                    <button type="button" className="close btn-dark" data-dismiss="modal"
+                                                    aria-label="Close" onClick={handleEditarProducto}>Guardar Cambios</button>
+                                               
+                                    <button type="button" className="close btn-dark" onClick={handleClose}>
                                         Close
                                     </button>
                                 

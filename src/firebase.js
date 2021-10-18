@@ -52,8 +52,8 @@ const consultarDatabase = async (nombreColeccion )=>{
 
 const actualizarDocumentoDatabase  = async (nombreColeccion, id, data )=>{
   try {
-    console.log(data.rol);
-    console.log(data.estado);
+    console.log(data);
+ 
     //const respuesta = await updateDoc(doc(db, nombreColeccion, id), data)
     await db.collection(nombreColeccion).doc(id).update(data);
     
@@ -62,7 +62,17 @@ const actualizarDocumentoDatabase  = async (nombreColeccion, id, data )=>{
   }
 }
 
+const addDocumentoDatabase  = async (nombreColeccion, data )=>{
+  try {
+    console.log(data);
+ 
 
+    await db.collection(nombreColeccion).add(data);
+    
+  } catch (e) {
+    throw new Error(e)
+  }
+}
 
 const signInWithGoogle = async () => {
   try {
@@ -143,5 +153,6 @@ const signInWithEmailAndPassword = async (email, password) => {
     sendPasswordResetEmail,
     logout,
     consultarDatabase,
-    actualizarDocumentoDatabase
+    actualizarDocumentoDatabase,
+    addDocumentoDatabase
   };
